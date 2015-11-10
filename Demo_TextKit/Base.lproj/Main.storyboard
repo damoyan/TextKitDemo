@@ -85,16 +85,17 @@
         <!--Two Column-->
         <scene sceneID="lTL-ew-vN5">
             <objects>
-                <viewController title="Two Column" id="JSh-dK-Rug" customClass="TwoColumnViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Two Column" automaticallyAdjustsScrollViewInsets="NO" id="JSh-dK-Rug" customClass="TwoColumnViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQm-Uz-IPo"/>
                         <viewControllerLayoutGuide type="bottom" id="HQ8-5k-WTm"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xaZ-n9-ZPO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Two Column" id="5BQ-qB-NXX">
                         <barButtonItem key="backBarButtonItem" title=" " id="U8v-F1-KiF"/>
                     </navigationItem>
