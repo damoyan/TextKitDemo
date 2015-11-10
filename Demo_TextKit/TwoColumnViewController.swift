@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TwoColumnViewController.swift
 //  Demo_TextKit
 //
 //  Created by Yu Pengyang on 11/10/15.
@@ -8,24 +8,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class TwoColumnViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
         return UIInterfaceOrientation.Portrait
     }
-}
 
+}

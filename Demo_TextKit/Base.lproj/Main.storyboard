@@ -85,7 +85,7 @@
         <!--Two Column-->
         <scene sceneID="lTL-ew-vN5">
             <objects>
-                <viewController title="Two Column" id="JSh-dK-Rug" sceneMemberID="viewController">
+                <viewController title="Two Column" id="JSh-dK-Rug" customClass="TwoColumnViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HQm-Uz-IPo"/>
                         <viewControllerLayoutGuide type="bottom" id="HQ8-5k-WTm"/>
@@ -144,7 +144,7 @@
         <!--Navigation Controller-->
         <scene sceneID="NcH-gm-Q8x">
             <objects>
-                <navigationController id="HBw-Fu-6ft" sceneMemberID="viewController">
+                <navigationController id="HBw-Fu-6ft" customClass="NavigationController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IGN-Rc-ax1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

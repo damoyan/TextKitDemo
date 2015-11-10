@@ -13,6 +13,8 @@
 		B3745A491BF19BB1001EA3B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3745A481BF19BB1001EA3B2 /* Images.xcassets */; };
 		B3745A4C1BF19BB1001EA3B2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3745A4A1BF19BB1001EA3B2 /* LaunchScreen.xib */; };
 		B3745A581BF19BB1001EA3B2 /* Demo_TextKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A571BF19BB1001EA3B2 /* Demo_TextKitTests.swift */; };
+		B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A611BF1A2A6001EA3B2 /* TwoColumnViewController.swift */; };
+		B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A631BF1B4E4001EA3B2 /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		B3745A511BF19BB1001EA3B2 /* Demo_TextKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Demo_TextKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3745A561BF19BB1001EA3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3745A571BF19BB1001EA3B2 /* Demo_TextKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo_TextKitTests.swift; sourceTree = "<group>"; };
+		B3745A611BF1A2A6001EA3B2 /* TwoColumnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoColumnViewController.swift; sourceTree = "<group>"; };
+		B3745A631BF1B4E4001EA3B2 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				B3745A481BF19BB1001EA3B2 /* Images.xcassets */,
 				B3745A4A1BF19BB1001EA3B2 /* LaunchScreen.xib */,
 				B3745A3F1BF19BB1001EA3B2 /* Supporting Files */,
+				B3745A611BF1A2A6001EA3B2 /* TwoColumnViewController.swift */,
+				B3745A631BF1B4E4001EA3B2 /* NavigationController.swift */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -212,6 +218,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
+				B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */,
 				B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */,
 				B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */,
 			);
