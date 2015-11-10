@@ -107,7 +107,7 @@
         <!--Exclusion Path-->
         <scene sceneID="w1C-ZR-97X">
             <objects>
-                <viewController id="T42-lP-omL" customClass="ExclusionPathViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="T42-lP-omL" customClass="ExclusionPathViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7sH-gc-mRE"/>
                         <viewControllerLayoutGuide type="bottom" id="oAE-tx-EDT"/>
@@ -115,11 +115,42 @@
                     <view key="view" contentMode="scaleToFill" id="kFN-fw-1z7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zP5-aB-MbW">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKw-tN-vdQ">
+                                <rect key="frame" x="38" y="86" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.90588235855102539" green="0.27058824896812439" blue="0.14117647707462311" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Ole-DP-Qwd" appends="YES" id="Qkb-3I-uPO"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zP5-aB-MbW" secondAttribute="trailing" id="6Kr-7a-3x0"/>
+                            <constraint firstItem="zP5-aB-MbW" firstAttribute="top" secondItem="7sH-gc-mRE" secondAttribute="bottom" id="FmG-x8-FUc"/>
+                            <constraint firstItem="zP5-aB-MbW" firstAttribute="leading" secondItem="kFN-fw-1z7" secondAttribute="leading" id="O4q-X4-sAm"/>
+                            <constraint firstItem="oAE-tx-EDT" firstAttribute="top" secondItem="zP5-aB-MbW" secondAttribute="bottom" id="p0B-X6-nWh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Exclusion Path" id="Cc3-QV-Cw5"/>
+                    <connections>
+                        <outlet property="maskView" destination="zKw-tN-vdQ" id="zaX-cq-vG0"/>
+                        <outlet property="textView" destination="zP5-aB-MbW" id="cAt-wE-QW1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aIJ-6Y-YRP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Ole-DP-Qwd">
+                    <connections>
+                        <action selector="handleGesture:" destination="T42-lP-omL" id="7kb-MQ-LKk"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-329" y="859"/>
         </scene>
