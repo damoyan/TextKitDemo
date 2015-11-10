@@ -106,7 +106,7 @@
         <!--Exclusion Path-->
         <scene sceneID="w1C-ZR-97X">
             <objects>
-                <viewController id="T42-lP-omL" sceneMemberID="viewController">
+                <viewController id="T42-lP-omL" customClass="ExclusionPathViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7sH-gc-mRE"/>
                         <viewControllerLayoutGuide type="bottom" id="oAE-tx-EDT"/>
@@ -125,7 +125,7 @@
         <!--Text Animation-->
         <scene sceneID="OZ1-ax-Qsn">
             <objects>
-                <viewController id="j2e-cW-MnU" sceneMemberID="viewController">
+                <viewController id="j2e-cW-MnU" customClass="TextAnimationViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Iqz-Kk-nMV"/>
                         <viewControllerLayoutGuide type="bottom" id="qus-n4-f8Z"/>
