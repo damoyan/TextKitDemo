@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="HBw-Fu-6ft">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -63,7 +64,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="j2e-cW-MnU" kind="show" id="goj-eq-4Vx"/>
+                                            <segue destination="j2e-cW-MnU" kind="show" id="Puo-B2-mUh"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -172,16 +173,24 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91L-k1-c6A">
                                         <rect key="frame" x="0.0" y="64" width="320" height="19.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rry-9J-xTG">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rry-9J-xTG">
+                                                <rect key="frame" x="20" y="0.0" width="300" height="19.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Label">
+                                                        <attributes>
+                                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="rry-9J-xTG" firstAttribute="leading" secondItem="91L-k1-c6A" secondAttribute="leading" id="1FS-ZX-SjR"/>
+                                            <constraint firstItem="rry-9J-xTG" firstAttribute="leading" secondItem="91L-k1-c6A" secondAttribute="leading" constant="20" id="1FS-ZX-SjR"/>
                                             <constraint firstItem="rry-9J-xTG" firstAttribute="top" secondItem="91L-k1-c6A" secondAttribute="top" id="Cxa-I5-yIs"/>
                                             <constraint firstAttribute="bottom" secondItem="rry-9J-xTG" secondAttribute="bottom" id="btf-sP-qGv"/>
                                             <constraint firstAttribute="trailing" secondItem="rry-9J-xTG" secondAttribute="trailing" id="xzw-5s-mgM"/>
@@ -192,6 +201,9 @@
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tapButton:" destination="j2e-cW-MnU" eventType="touchUpInside" id="zkU-bk-MLL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -217,7 +229,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Text Animation" id="IO4-Z1-FCp"/>
                     <connections>
-                        <outlet property="label" destination="rry-9J-xTG" id="uch-Rp-Ub7"/>
+                        <outlet property="label" destination="rry-9J-xTG" id="ItU-gh-mZG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zUY-rZ-nHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
