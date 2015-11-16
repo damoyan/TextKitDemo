@@ -20,8 +20,8 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.Portrait.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.Portrait
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {

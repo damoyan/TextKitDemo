@@ -29,7 +29,7 @@ class TextAnimationViewController: ViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        println("label: \(label.bounds.size)")
+        print("label: \(label.bounds.size)")
         textContainer.size = CGSize(width: label.bounds.size.width, height: CGFloat.max)
     }
 
@@ -42,7 +42,6 @@ class TextAnimationViewController: ViewController {
             let l = layers[i]
             let duration = (Double(arc4random() % 100) / 200.0) + 0.5
             let delay = Double(arc4random() % 100) / 100.0
-            println(delay)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * delay)), dispatch_get_main_queue(), { () -> Void in
                 CATransaction.begin()
                 CATransaction.setDisableActions(true)
@@ -71,14 +70,14 @@ class TextAnimationViewController: ViewController {
         let range = layoutManager.glyphRangeForTextContainer(textContainer)
         let usedRect = layoutManager.usedRectForTextContainer(textContainer)
         let origin = CGPoint(x: 20, y: 200)
-        println("textContainer rect: \(usedRect)")
+        print("textContainer rect: \(usedRect)")
         for var i = range.location; i < NSMaxRange(range); {
             var r = NSMakeRange(i, 1)
             let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
             let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
             
             let textForLayer = textStorage.attributedSubstringFromRange(charRange)
-            var layerFrame = CGRectMake(origin.x + glyphRect.origin.x - glyphRect.width
+            let layerFrame = CGRectMake(origin.x + glyphRect.origin.x - glyphRect.width
                 , origin.y + glyphRect.origin.y, glyphRect.width * 3
                 , glyphRect.height)
             

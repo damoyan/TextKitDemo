@@ -34,7 +34,7 @@ class ExclusionPathViewController: ViewController {
     
     private func updateExclusionPath(textContainer: NSTextContainer) {
         let size = textContainer.size
-        var radius = size.width > size.height ? size.height / 2.0 : size.width / 2.0
+        let radius = size.width > size.height ? size.height / 2.0 : size.width / 2.0
         let center = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
         let topHalf = UIBezierPath()
         topHalf.moveToPoint(CGPoint(x: 0, y: 0))
@@ -70,12 +70,12 @@ class ExclusionPathViewController: ViewController {
         rect.origin.x -= textView.textContainerInset.left
         rect.origin.y -= textView.textContainerInset.top
         let exPath = UIBezierPath(rect: rect)
-        if let ex = textView.textContainer.exclusionPaths {
+        if textView.textContainer.exclusionPaths.count > 0 {
             if let i = maskViewExclusionIndex {
-                textView.textContainer.exclusionPaths![i] = exPath
+                textView.textContainer.exclusionPaths[i] = exPath
             } else {
-                textView.textContainer.exclusionPaths!.append(exPath)
-                maskViewExclusionIndex = textView.textContainer.exclusionPaths!.count - 1
+                textView.textContainer.exclusionPaths.append(exPath)
+                maskViewExclusionIndex = textView.textContainer.exclusionPaths.count - 1
             }
         } else {
             textView.textContainer.exclusionPaths = [exPath]

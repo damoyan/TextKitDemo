@@ -64,8 +64,8 @@ class TwoColumnViewController: ViewController {
         view.addSubview(rightTextView!)
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.AllButUpsideDown
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {

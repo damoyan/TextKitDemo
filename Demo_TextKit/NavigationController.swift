@@ -21,11 +21,11 @@ class NavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func supportedInterfaceOrientations() -> Int {
-        return topViewController.supportedInterfaceOrientations()
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return topViewController?.supportedInterfaceOrientations() ?? UIInterfaceOrientationMask.Portrait
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
-        return topViewController.preferredInterfaceOrientationForPresentation()
+        return topViewController?.preferredInterfaceOrientationForPresentation() ?? UIInterfaceOrientation.Portrait
     }
 }
