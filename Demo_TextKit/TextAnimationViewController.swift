@@ -78,14 +78,17 @@ class TextAnimationViewController: ViewController {
             let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
             
             let textForLayer = textStorage.attributedSubstringFromRange(charRange)
-            var layerFrame = CGRectMake(origin.x + glyphRect.origin.x - glyphRect.width, origin.y + glyphRect.origin.y, glyphRect.width * 3, glyphRect.height)
+            var layerFrame = CGRectMake(origin.x + glyphRect.origin.x - glyphRect.width
+                , origin.y + glyphRect.origin.y, glyphRect.width * 3
+                , glyphRect.height)
             
             let textLayer = CATextLayer()
-            textLayer.contentsScale = UIScreen.mainScreen().scale
             textLayer.string = textForLayer//.string
             textLayer.alignmentMode = kCAAlignmentCenter
             textLayer.frame = layerFrame
             textLayer.opacity = 0
+            textLayer.wrapped = true
+            textLayer.contentsScale = UIScreen.mainScreen().scale
             view.layer.addSublayer(textLayer)
             layers.append(textLayer)
             i += r.length
