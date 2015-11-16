@@ -165,9 +165,60 @@
                     <view key="view" contentMode="scaleToFill" id="KCb-Vo-QJG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y1y-O7-miE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91L-k1-c6A">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="19.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rry-9J-xTG">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="19.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="rry-9J-xTG" firstAttribute="leading" secondItem="91L-k1-c6A" secondAttribute="leading" id="1FS-ZX-SjR"/>
+                                            <constraint firstItem="rry-9J-xTG" firstAttribute="top" secondItem="91L-k1-c6A" secondAttribute="top" id="Cxa-I5-yIs"/>
+                                            <constraint firstAttribute="bottom" secondItem="rry-9J-xTG" secondAttribute="bottom" id="btf-sP-qGv"/>
+                                            <constraint firstAttribute="trailing" secondItem="rry-9J-xTG" secondAttribute="trailing" id="xzw-5s-mgM"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HII-tR-YHV">
+                                        <rect key="frame" x="137" y="91" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="91L-k1-c6A" secondAttribute="trailing" id="309-GV-0CV"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HII-tR-YHV" secondAttribute="bottom" constant="12" id="Jqo-77-ES1"/>
+                                    <constraint firstItem="91L-k1-c6A" firstAttribute="leading" secondItem="y1y-O7-miE" secondAttribute="leading" id="PkF-UH-Yg0"/>
+                                    <constraint firstAttribute="centerX" secondItem="HII-tR-YHV" secondAttribute="centerX" id="pp9-mA-jeW"/>
+                                    <constraint firstItem="HII-tR-YHV" firstAttribute="top" secondItem="91L-k1-c6A" secondAttribute="bottom" constant="7.5" id="tuN-BL-PIc"/>
+                                    <constraint firstItem="91L-k1-c6A" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="top" constant="64" id="voJ-y4-heo"/>
+                                    <constraint firstItem="91L-k1-c6A" firstAttribute="width" secondItem="y1y-O7-miE" secondAttribute="width" id="x8I-s7-2Oj"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="y1y-O7-miE" secondAttribute="centerX" id="4qU-JQ-gqm"/>
+                            <constraint firstAttribute="centerY" secondItem="y1y-O7-miE" secondAttribute="centerY" id="4rp-49-JBu"/>
+                            <constraint firstAttribute="trailing" secondItem="y1y-O7-miE" secondAttribute="trailing" id="5w2-kB-ugh"/>
+                            <constraint firstItem="qus-n4-f8Z" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="bottom" id="OrX-QT-WPt"/>
+                            <constraint firstItem="y1y-O7-miE" firstAttribute="leading" secondItem="KCb-Vo-QJG" secondAttribute="leading" id="sLe-A2-Wd4"/>
+                            <constraint firstItem="y1y-O7-miE" firstAttribute="top" secondItem="KCb-Vo-QJG" secondAttribute="top" id="tyC-x1-9np"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Text Animation" id="IO4-Z1-FCp"/>
+                    <connections>
+                        <outlet property="label" destination="rry-9J-xTG" id="uch-Rp-Ub7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zUY-rZ-nHr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
