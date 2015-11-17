@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B329D9B31BFAD05B00E23A46 /* DataDetectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */; };
+		B329D9B51BFAD08800E23A46 /* InteractWithGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */; };
 		B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A411BF19BB1001EA3B2 /* AppDelegate.swift */; };
 		B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A431BF19BB1001EA3B2 /* ViewController.swift */; };
 		B3745A491BF19BB1001EA3B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3745A481BF19BB1001EA3B2 /* Images.xcassets */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDetectViewController.swift; sourceTree = "<group>"; };
+		B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractWithGestureViewController.swift; sourceTree = "<group>"; };
 		B3745A3C1BF19BB1001EA3B2 /* Demo_TextKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_TextKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3745A401BF19BB1001EA3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3745A411BF19BB1001EA3B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 				B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */,
 				B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */,
 				B3745A691BF1CCFB001EA3B2 /* Constant.swift */,
+				B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */,
+				B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -231,8 +237,10 @@
 				B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */,
 				B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */,
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
+				B329D9B31BFAD05B00E23A46 /* DataDetectViewController.swift in Sources */,
 				B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */,
 				B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */,
+				B329D9B51BFAD08800E23A46 /* InteractWithGestureViewController.swift in Sources */,
 				B3745A661BF1B7CA001EA3B2 /* ExclusionPathViewController.swift in Sources */,
 				B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */,
 			);

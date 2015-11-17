@@ -22,10 +22,10 @@ class TextAnimationViewController: ViewController {
 
         // Do any additional setup after loading the view.
         setup()
-        setupString("just test for the effect")
+        setupString("just test for the effect, just test for the effect, just test for the effect, just test for the effect")
 //        setupString(displayString)
 //        label.attributedText = textStorage
-//        print(label.font)
+        print(label.font)
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,7 +64,8 @@ class TextAnimationViewController: ViewController {
 
     private func setupString(string: String) {
         //NSFontAttributeName: UIFont(name: "Papyrus", size: 16)!,
-        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "Papyrus", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
+        // TimesNewRomanPS-ItalicMT
+        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
         textStorage.setAttributedString(attri)
     }
     
