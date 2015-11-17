@@ -44,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func setupUI() {
         UINavigationBar.appearance().backgroundColor = UIColor.whiteColor()
+        UINavigationBar.appearance().translucent = false
     }
 }
 
