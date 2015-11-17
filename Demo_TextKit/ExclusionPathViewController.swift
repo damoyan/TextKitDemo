@@ -71,7 +71,7 @@ class ExclusionPathViewController: ViewController {
         rect.origin.y -= textView.textContainerInset.top
         let exPath = UIBezierPath(rect: rect)
         if textView.textContainer.exclusionPaths.count > 0 {
-            if let i = maskViewExclusionIndex {
+            if let i = maskViewExclusionIndex where i < textView.textContainer.exclusionPaths.count {
                 textView.textContainer.exclusionPaths[i] = exPath
             } else {
                 textView.textContainer.exclusionPaths.append(exPath)
