@@ -23,6 +23,7 @@
 		B3B8302A1BFAFE4900F60678 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B830291BFAFE4900F60678 /* TextCell.xib */; };
 		B3B8302C1BFC463B00F60678 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302B1BFC463B00F60678 /* TextView.swift */; };
 		B3B8302E1BFC65E900F60678 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302D1BFC65E900F60678 /* TextViewController.swift */; };
+		B3B830301BFC6ACE00F60678 /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		B3B830291BFAFE4900F60678 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
 		B3B8302B1BFC463B00F60678 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		B3B8302D1BFC65E900F60678 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				B3B830291BFAFE4900F60678 /* TextCell.xib */,
 				B3B8302B1BFC463B00F60678 /* TextView.swift */,
 				B3B8302D1BFC65E900F60678 /* TextViewController.swift */,
+				B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
 				B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */,
 				B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */,
+				B3B830301BFC6ACE00F60678 /* CoreTextViewController.swift in Sources */,
 				B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */,
 				B3745A661BF1B7CA001EA3B2 /* ExclusionPathViewController.swift in Sources */,
 				B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */,

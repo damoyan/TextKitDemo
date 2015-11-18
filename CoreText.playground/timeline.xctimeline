@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Timeline
+   version = "3.0">
+   <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/yupengyang/Developer/CoreText.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=1886&amp;EndingLineNumber=40&amp;StartingLineNumber=40&amp;Timestamp=469537553.397063"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "#CharacterRangeLen=1&amp;CharacterRangeLoc=1702&amp;EndingColumnNumber=9&amp;EndingLineNumber=56&amp;StartingColumnNumber=1&amp;StartingLineNumber=55&amp;Timestamp=469537553.397177"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "#CharacterRangeLen=4&amp;CharacterRangeLoc=1678&amp;EndingColumnNumber=5&amp;EndingLineNumber=56&amp;StartingColumnNumber=1&amp;StartingLineNumber=56&amp;Timestamp=469537553.405211"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+   </TimelineItems>
+</Timeline>

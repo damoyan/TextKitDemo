@@ -106,11 +106,35 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="TextKit Demo" id="b9z-BB-Xrk">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wec-s8-b84"/>
+                        <barButtonItem key="rightBarButtonItem" title="CT" id="mfS-k8-ujb">
+                            <connections>
+                                <segue destination="Bux-C3-pUQ" kind="show" id="C9A-ei-8Zp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDz-Sf-vDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-159" y="111"/>
+        </scene>
+        <!--Core Text-->
+        <scene sceneID="Ho0-2F-34M">
+            <objects>
+                <viewController id="Bux-C3-pUQ" customClass="CoreTextViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GTb-WO-S7K"/>
+                        <viewControllerLayoutGuide type="bottom" id="BWg-Yg-mRy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2O8-3X-2An">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Core Text" id="SNR-aN-kh6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="phN-Fo-KJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="248" y="111"/>
         </scene>
         <!--Two Column-->
         <scene sceneID="lTL-ew-vN5">
