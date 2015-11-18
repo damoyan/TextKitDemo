@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B329D9B31BFAD05B00E23A46 /* DataDetectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */; };
-		B329D9B51BFAD08800E23A46 /* InteractWithGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */; };
+		B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */; };
 		B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A411BF19BB1001EA3B2 /* AppDelegate.swift */; };
 		B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A431BF19BB1001EA3B2 /* ViewController.swift */; };
 		B3745A491BF19BB1001EA3B2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3745A481BF19BB1001EA3B2 /* Images.xcassets */; };
@@ -22,6 +21,8 @@
 		B388C3211BF9D20100F59C5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3745A451BF19BB1001EA3B2 /* Main.storyboard */; };
 		B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B830271BFAFE2D00F60678 /* TextCell.swift */; };
 		B3B8302A1BFAFE4900F60678 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B830291BFAFE4900F60678 /* TextCell.xib */; };
+		B3B8302C1BFC463B00F60678 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302B1BFC463B00F60678 /* TextView.swift */; };
+		B3B8302E1BFC65E900F60678 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302D1BFC65E900F60678 /* TextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDetectViewController.swift; sourceTree = "<group>"; };
-		B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractWithGestureViewController.swift; sourceTree = "<group>"; };
+		B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractViewController.swift; sourceTree = "<group>"; };
 		B3745A3C1BF19BB1001EA3B2 /* Demo_TextKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_TextKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3745A401BF19BB1001EA3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3745A411BF19BB1001EA3B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +54,8 @@
 		B3745A691BF1CCFB001EA3B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B3B830271BFAFE2D00F60678 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 		B3B830291BFAFE4900F60678 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
+		B3B8302B1BFC463B00F60678 /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		B3B8302D1BFC65E900F60678 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,10 +108,11 @@
 				B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */,
 				B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */,
 				B3745A691BF1CCFB001EA3B2 /* Constant.swift */,
-				B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */,
-				B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */,
+				B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */,
 				B3B830271BFAFE2D00F60678 /* TextCell.swift */,
 				B3B830291BFAFE4900F60678 /* TextCell.xib */,
+				B3B8302B1BFC463B00F60678 /* TextView.swift */,
+				B3B8302D1BFC65E900F60678 /* TextViewController.swift */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -241,14 +244,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B8302E1BFC65E900F60678 /* TextViewController.swift in Sources */,
 				B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */,
+				B3B8302C1BFC463B00F60678 /* TextView.swift in Sources */,
 				B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */,
 				B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */,
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
-				B329D9B31BFAD05B00E23A46 /* DataDetectViewController.swift in Sources */,
+				B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */,
 				B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */,
 				B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */,
-				B329D9B51BFAD08800E23A46 /* InteractWithGestureViewController.swift in Sources */,
 				B3745A661BF1B7CA001EA3B2 /* ExclusionPathViewController.swift in Sources */,
 				B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */,
 			);

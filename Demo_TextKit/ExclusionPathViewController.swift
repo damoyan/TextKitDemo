@@ -89,4 +89,12 @@ class ExclusionPathViewController: ViewController {
         maskView.center = point
         addMaskViewExclusionPath()
     }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.AllButUpsideDown
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.Portrait
+    }
 }

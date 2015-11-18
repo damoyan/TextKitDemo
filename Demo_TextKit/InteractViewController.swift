@@ -1,5 +1,5 @@
 //
-//  InteractWithGestureViewController.swift
+//  DataDetectViewController.swift
 //  Demo_TextKit
 //
 //  Created by Yu Pengyang on 11/17/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InteractWithGestureViewController: UITableViewController {
+class InteractViewController: UITableViewController {
 
     let cellId = "cell"
     
@@ -17,6 +17,7 @@ class InteractWithGestureViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44
         tableView.registerNib(UINib(nibName: "TextCell", bundle: nil), forCellReuseIdentifier: cellId)
+        tableView.contentInset = UIEdgeInsets(top: tableView.contentInset.top, left: 0, bottom: 12, right: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,23 +28,35 @@ class InteractWithGestureViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
     }
 
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellId, forIndexPath: indexPath) as! TextCell
+        let res = NSMutableAttributedString(attributedString: a)
+        res.appendAttributedString(attri)
+        res.appendAttributedString(b)
+        res.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, res.length))
+        cell.update(res)
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 12
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
