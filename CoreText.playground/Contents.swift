@@ -2,8 +2,8 @@
 
 import UIKit
 
-
-let cgfont = CGFontCreateWithFontName("Helvetica")!
+let fontName = "Zapfino"
+let cgfont = CGFontCreateWithFontName(fontName)!
 let ctfont = CTFontCreateWithGraphicsFont(cgfont, 16, nil, nil)
 
 // get charactes of the string
@@ -35,6 +35,7 @@ for var i = 0; i < res.count; i++ {
     glyphs.append(g)
 }
 
+// get glyph rect
 let count = glyphs.count
 var rect:CGRect = CGRectZero
 var rects = [CGRect]()
@@ -47,16 +48,77 @@ for var i = 0; i < glyphs.count; i++ {
     rects.append(r)
 }
 
+let attriString = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: fontName, size: 16)!])
 let textView = UITextView()
 textView.textContainerInset = UIEdgeInsetsZero
 textView.textContainer.lineFragmentPadding = 0
 textView.scrollEnabled = false
-textView.attributedText = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "Helvetica", size: 16)!])
+textView.attributedText = attriString
 textView.sizeToFit()
+let w = textView.frame.width
+
+let framesetter = CTFramesetterCreateWithAttributedString(attriString)
+var path = CGPathCreateMutable()
+CGPathAddRect(path, nil, CGRect(x: 0, y: 0, width: w, height: CGFloat.max))
+let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, attriString.length), nil, CGSizeMake(w, CGFloat.max), nil)
+let framePath = CGPathCreateWithRect(CGRect(x: 0, y: 0, width: size.width, height: size.height), nil)
+let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attriString.length), framePath, nil)
+var lines = (CTFrameGetLines(frame) as NSArray) as! [CTLine]
+var pp: CGPoint = CGPointZero
+let origin = withUnsafeMutablePointer(&pp) { (p) -> CGPoint in
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, 0), p)
+    return p.memory
+}
+
+for var i = 0; i < lines.count; i++ {
+    let line = lines[i]
+    
+    let range = CTLineGetStringRange(line)
+    let start = range.location
+    let end = range.location + range.length
+    for var j = 0; j < end; j++ {
+        let offset = CTLineGetOffsetForStringIndex(line, j, nil)
+        rects[j].origin.x += offset
+        //todo: no y position because there is only one line
+        rects[j].origin.y += origin.y
+    }
+}
+
+for rect in rects {
+    let layer = CALayer()
+    layer.borderColor = UIColor.redColor().CGColor
+    layer.borderWidth = 1 / UIScreen.mainScreen().scale
+    layer.frame = rect
+    textView.layer.addSublayer(layer)
+}
+
+
+
+
+
 let view = UIView(frame: textView.bounds)
 view.addSubview(textView)
 //var g = glyphs[0]
 //withUnsafeMutablePointers(&rects, &glyphs[0]) { (p0, p1) -> Void in
 //    CTFontGetBoundingRectsForGlyphs(ctfont, CTFontOrientation.Default, p1, p0, count)
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
