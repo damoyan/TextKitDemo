@@ -63,6 +63,7 @@ class ExclusionPathViewController: ViewController {
         bottomHalf.closePath()
         
         textContainer.exclusionPaths = [topHalf, bottomHalf]
+        maskViewExclusionIndex = nil
     }
     
     private func addMaskViewExclusionPath() {
