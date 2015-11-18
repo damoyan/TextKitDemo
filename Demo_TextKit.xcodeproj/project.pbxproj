@@ -20,6 +20,8 @@
 		B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */; };
 		B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A691BF1CCFB001EA3B2 /* Constant.swift */; };
 		B388C3211BF9D20100F59C5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3745A451BF19BB1001EA3B2 /* Main.storyboard */; };
+		B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B830271BFAFE2D00F60678 /* TextCell.swift */; };
+		B3B8302A1BFAFE4900F60678 /* TextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B830291BFAFE4900F60678 /* TextCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExclusionPathViewController.swift; sourceTree = "<group>"; };
 		B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimationViewController.swift; sourceTree = "<group>"; };
 		B3745A691BF1CCFB001EA3B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B3B830271BFAFE2D00F60678 /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		B3B830291BFAFE4900F60678 /* TextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +108,8 @@
 				B3745A691BF1CCFB001EA3B2 /* Constant.swift */,
 				B329D9B21BFAD05B00E23A46 /* DataDetectViewController.swift */,
 				B329D9B41BFAD08800E23A46 /* InteractWithGestureViewController.swift */,
+				B3B830271BFAFE2D00F60678 /* TextCell.swift */,
+				B3B830291BFAFE4900F60678 /* TextCell.xib */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			files = (
 				B388C3211BF9D20100F59C5E /* Main.storyboard in Resources */,
 				B3745A4C1BF19BB1001EA3B2 /* LaunchScreen.xib in Resources */,
+				B3B8302A1BFAFE4900F60678 /* TextCell.xib in Resources */,
 				B3745A491BF19BB1001EA3B2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */,
 				B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */,
 				B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */,
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,

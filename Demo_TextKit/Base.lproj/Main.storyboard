@@ -234,12 +234,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="91L-k1-c6A">
-                                        <rect key="frame" x="0.0" y="64" width="320" height="53.5"/>
+                                        <rect key="frame" x="0.0" y="64" width="320" height="54.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="just test for the effect, just test for the effect, just test for the effect, just test for the effect" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rry-9J-xTG">
-                                                <rect key="frame" x="20" y="0.0" width="280" height="53.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="just test for the effect" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rry-9J-xTG">
+                                                <rect key="frame" x="20" y="0.0" width="280" height="54.5"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="TimesNewRomanPS-ItalicMT" family="Times New Roman" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -253,7 +253,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HII-tR-YHV">
-                                        <rect key="frame" x="137" y="124.5" width="46" height="30"/>
+                                        <rect key="frame" x="87" y="126" width="46" height="30"/>
                                         <state key="normal" title="Button">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -261,12 +261,20 @@
                                             <action selector="tapButton:" destination="j2e-cW-MnU" eventType="touchUpInside" id="zkU-bk-MLL"/>
                                         </connections>
                                     </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="H8T-KR-0hU">
+                                        <rect key="frame" x="185.5" y="125" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="toggleShowBorder:" destination="j2e-cW-MnU" eventType="valueChanged" id="L4C-2P-etm"/>
+                                        </connections>
+                                    </switch>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="91L-k1-c6A" secondAttribute="trailing" id="309-GV-0CV"/>
+                                    <constraint firstItem="H8T-KR-0hU" firstAttribute="centerX" secondItem="y1y-O7-miE" secondAttribute="centerX" constant="50" id="7De-Yx-FrO"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HII-tR-YHV" secondAttribute="bottom" constant="12" id="Jqo-77-ES1"/>
                                     <constraint firstItem="91L-k1-c6A" firstAttribute="leading" secondItem="y1y-O7-miE" secondAttribute="leading" id="PkF-UH-Yg0"/>
-                                    <constraint firstAttribute="centerX" secondItem="HII-tR-YHV" secondAttribute="centerX" id="pp9-mA-jeW"/>
+                                    <constraint firstItem="H8T-KR-0hU" firstAttribute="centerY" secondItem="HII-tR-YHV" secondAttribute="centerY" id="dtE-7A-N7N"/>
+                                    <constraint firstAttribute="centerX" secondItem="HII-tR-YHV" secondAttribute="centerX" constant="50" id="pp9-mA-jeW"/>
                                     <constraint firstItem="HII-tR-YHV" firstAttribute="top" secondItem="91L-k1-c6A" secondAttribute="bottom" constant="7.5" id="tuN-BL-PIc"/>
                                     <constraint firstItem="91L-k1-c6A" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="top" constant="64" id="voJ-y4-heo"/>
                                     <constraint firstItem="91L-k1-c6A" firstAttribute="width" secondItem="y1y-O7-miE" secondAttribute="width" id="x8I-s7-2Oj"/>

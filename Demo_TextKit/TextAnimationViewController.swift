@@ -17,6 +17,8 @@ class TextAnimationViewController: ViewController {
     let textContainer = NSTextContainer()
     var layers = [CATextLayer]()
     
+    var showBorder = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +40,16 @@ class TextAnimationViewController: ViewController {
     }
     
     @IBAction func tapButton(sender: AnyObject) {
+        animation()
+    }
+    
+    @IBAction func toggleShowBorder(sender: UISwitch) {
+        showBorder = sender.on
+        display()
+        animation()
+    }
+    
+    private func animation() {
         for var i = 0; i < layers.count; i++ {
             let l = layers[i]
             let duration = (Double(arc4random() % 100) / 200.0) + 0.5
@@ -52,7 +64,13 @@ class TextAnimationViewController: ViewController {
                 CATransaction.commit()
             })
         }
-        
+    }
+    
+    private func removeOldLayers() {
+        for layer in layers {
+            layer.removeFromSuperlayer()
+        }
+        layers.removeAll(keepCapacity: true)
     }
     
     private func setup() {
@@ -64,28 +82,46 @@ class TextAnimationViewController: ViewController {
 
     private func setupString(string: String) {
         //NSFontAttributeName: UIFont(name: "Papyrus", size: 16)!,
-        // TimesNewRomanPS-ItalicMT
-        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
+        // TimesNewRomanPS-ItalicMT UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!
+        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "Zapfino", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
         textStorage.setAttributedString(attri)
     }
     
     private func display() {
-        layers.removeAll(keepCapacity: false)
+        removeOldLayers()
         let range = layoutManager.glyphRangeForTextContainer(textContainer)
         let origin = CGPoint(x: 20, y: 200)
         for var i = range.location; i < NSMaxRange(range); {
             var r = NSMakeRange(i, 1)
             let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
-            let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
-            
             let textForLayer = textStorage.attributedSubstringFromRange(charRange)
+            
+            let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
+//            print("text kit  rect: \(glyphRect)")
+            
+//            let uifont = textStorage.attribute(NSFontAttributeName, atIndex: charRange.location, effectiveRange: nil) as! UIFont
+//            let ctfont = CTFontCreateWithNameAndOptions(uifont.fontName, uifont.pointSize, nil, CTFontOptions.Default)
+//            let char = textForLayer.string.substringToIndex(textForLayer.string.startIndex.successor())
+//            var glyph = CTFontGetGlyphWithName(ctfont, char)
+//            var brs: CGRect = CGRectZero
+//            let bb = withUnsafePointer(&glyph, { (pointer: UnsafePointer<CGGlyph>) -> CGRect in
+//                return withUnsafeMutablePointer(&brs, { (p: UnsafeMutablePointer<CGRect>) -> CGRect in
+//                    return CTFontGetBoundingRectsForGlyphs(ctfont, CTFontOrientation.Default, pointer, p, 1)
+//                })
+//            })
+            
+//            CTFontGetBoundingRectsForGlyphs(fon, .kCTFontHorizontalOrientation, &glyph, brs, 1)
+//            print("core text rect: \(bb)")
             var layerFrame: CGRect
             if layers.count == 0 {
                 layerFrame = CGRectMake(origin.x + glyphRect.origin.x, origin.y + glyphRect.origin.y, glyphRect.width, glyphRect.height)
             } else {
-                layerFrame = CGRectMake(origin.x + glyphRect.origin.x - glyphRect.width, origin.y + glyphRect.origin.y, glyphRect.width * 3, glyphRect.height)
+                if !showBorder {
+                    layerFrame = CGRectMake(origin.x + glyphRect.origin.x - (glyphRect.width * 5), origin.y + glyphRect.origin.y, glyphRect.width * 11, glyphRect.height)
+                } else {
+                    layerFrame = CGRectMake(origin.x + glyphRect.origin.x, origin.y + glyphRect.origin.y, glyphRect.width, glyphRect.height)
+                }
             }
-            
             let textLayer = CATextLayer()
             /// if set `string` with NSAttributedString, we still need to set the `font` and `fontSize` property
             /// or the characters displayed will be a little bolder than original font.
@@ -100,6 +136,10 @@ class TextAnimationViewController: ViewController {
             textLayer.frame = layerFrame
             textLayer.opacity = 0
             textLayer.wrapped = true
+            if showBorder {
+                textLayer.borderColor = UIColor.redColor().CGColor
+                textLayer.borderWidth = 1 / UIScreen.mainScreen().scale
+            }
             textLayer.contentsScale = UIScreen.mainScreen().scale
             view.layer.addSublayer(textLayer)
             layers.append(textLayer)
@@ -112,8 +152,4 @@ extension TextAnimationViewController: NSLayoutManagerDelegate {
     func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) {
         display()
     }
-    
-//    func layoutManager(layoutManager: NSLayoutManager, textContainer: NSTextContainer, didChangeGeometryFromSize oldSize: CGSize) {
-//        display()
-//    }
 }
