@@ -57,6 +57,7 @@ textView.attributedText = attriString
 textView.sizeToFit()
 let w = textView.frame.width
 
+// calculate the frame when the string is rendered
 let framesetter = CTFramesetterCreateWithAttributedString(attriString)
 var path = CGPathCreateMutable()
 CGPathAddRect(path, nil, CGRect(x: 0, y: 0, width: w, height: CGFloat.max))
@@ -84,17 +85,26 @@ for var i = 0; i < lines.count; i++ {
     }
 }
 
-for rect in rects {
-    let layer = CALayer()
-    layer.borderColor = UIColor.redColor().CGColor
-    layer.borderWidth = 1 / UIScreen.mainScreen().scale
-    layer.frame = rect
-    textView.layer.addSublayer(layer)
+// add layer rect to display
+//for rect in rects {
+//    let layer = CALayer()
+//    layer.borderColor = UIColor.redColor().CGColor
+//    layer.borderWidth = 1 / UIScreen.mainScreen().scale
+//    layer.frame = rect
+//    textView.layer.addSublayer(layer)
+//}
+
+
+// find CTRun
+var runRects = [CGRect]()
+let runs = (CTLineGetGlyphRuns(lines[0]) as NSArray) as! [CTRun]
+print(runs.count)
+for run in runs {
+    let gc = CTRunGetGlyphCount(run)
+    for var x = 0; x < gc; x++ {
+        CTRunGetPositions(run, CFRangeMake(0, 0), <#T##buffer: UnsafeMutablePointer<CGPoint>##UnsafeMutablePointer<CGPoint>#>)
+    }
 }
-
-
-
-
 
 let view = UIView(frame: textView.bounds)
 view.addSubview(textView)
