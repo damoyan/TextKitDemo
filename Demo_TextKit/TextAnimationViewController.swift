@@ -85,7 +85,7 @@ class TextAnimationViewController: ViewController {
         //NSFontAttributeName: UIFont(name: "Papyrus", size: 16)!,
         // TimesNewRomanPS-ItalicMT UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!
         // Zapfino
-        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
+        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: UIFont(name: "Zapfino", size: 16)!, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
         textStorage.setAttributedString(attri)
     }
     
@@ -96,6 +96,8 @@ class TextAnimationViewController: ViewController {
         for var i = range.location; i < NSMaxRange(range); {
             var r = NSMakeRange(i, 1)
             let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
+            print("glyph: \(r)")
+            print("charr: \(charRange)")
             let textForLayer = textStorage.attributedSubstringFromRange(charRange)
             
             let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
