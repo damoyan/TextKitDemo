@@ -106,11 +106,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="TextKit Demo" id="b9z-BB-Xrk">
                         <barButtonItem key="backBarButtonItem" title=" " id="Wec-s8-b84"/>
-                        <barButtonItem key="rightBarButtonItem" title="CT" id="mfS-k8-ujb">
-                            <connections>
-                                <segue destination="Bux-C3-pUQ" kind="show" id="C9A-ei-8Zp"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDz-Sf-vDj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -128,13 +123,68 @@
                     <view key="view" contentMode="scaleToFill" id="2O8-3X-2An">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="just test for the effect. just test for the effect. just test for the effect. just test for the effect." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UHs-2F-LNl">
+                                <rect key="frame" x="0.0" y="144" width="320" height="178.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="178.5" id="uQd-4H-4Xm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Zapfino" family="Zapfino" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="50" translatesAutoresizingMaskIntoConstraints="NO" id="HWP-MZ-uR3">
+                                <rect key="frame" x="28" y="72" width="253" height="31"/>
+                                <connections>
+                                    <action selector="sliderValueChanged:" destination="Bux-C3-pUQ" eventType="valueChanged" id="5sO-j2-rAa"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FyA-4Q-RU8">
+                                <rect key="frame" x="12" y="76" width="10.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dng-Um-wgR">
+                                <rect key="frame" x="287" y="76" width="20.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V6d-IJ-I0U">
+                                <rect key="frame" x="12" y="110" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FyA-4Q-RU8" firstAttribute="top" secondItem="GTb-WO-S7K" secondAttribute="bottom" constant="12" id="372-n5-X7u"/>
+                            <constraint firstItem="UHs-2F-LNl" firstAttribute="top" secondItem="GTb-WO-S7K" secondAttribute="bottom" constant="80" id="5dg-Ic-fzW"/>
+                            <constraint firstItem="V6d-IJ-I0U" firstAttribute="top" secondItem="HWP-MZ-uR3" secondAttribute="bottom" constant="8" id="6F2-bn-JrX"/>
+                            <constraint firstItem="HWP-MZ-uR3" firstAttribute="top" secondItem="GTb-WO-S7K" secondAttribute="bottom" constant="8" id="B2w-RQ-sWe"/>
+                            <constraint firstItem="FyA-4Q-RU8" firstAttribute="leading" secondItem="2O8-3X-2An" secondAttribute="leading" constant="12" id="TSR-R5-in5"/>
+                            <constraint firstItem="HWP-MZ-uR3" firstAttribute="leading" secondItem="FyA-4Q-RU8" secondAttribute="trailing" constant="8" id="Ugz-Ha-cCY"/>
+                            <constraint firstItem="dng-Um-wgR" firstAttribute="top" secondItem="GTb-WO-S7K" secondAttribute="bottom" constant="12" id="XB7-p5-33A"/>
+                            <constraint firstItem="UHs-2F-LNl" firstAttribute="leading" secondItem="2O8-3X-2An" secondAttribute="leading" id="dqs-n9-aOr"/>
+                            <constraint firstAttribute="trailing" secondItem="dng-Um-wgR" secondAttribute="trailing" constant="12" id="f6M-jD-Kj9"/>
+                            <constraint firstItem="dng-Um-wgR" firstAttribute="leading" secondItem="HWP-MZ-uR3" secondAttribute="trailing" constant="8" id="qfO-sL-Gzl"/>
+                            <constraint firstItem="V6d-IJ-I0U" firstAttribute="leading" secondItem="2O8-3X-2An" secondAttribute="leading" constant="12" id="tat-Jp-4N5"/>
+                            <constraint firstAttribute="trailing" secondItem="UHs-2F-LNl" secondAttribute="trailing" id="ujl-HF-2X3"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Core Text" id="SNR-aN-kh6"/>
+                    <connections>
+                        <outlet property="currentLabel" destination="V6d-IJ-I0U" id="XIn-Fc-kim"/>
+                        <outlet property="height" destination="uQd-4H-4Xm" id="cpW-Ts-qyQ"/>
+                        <outlet property="slider" destination="HWP-MZ-uR3" id="N70-I4-sdn"/>
+                        <outlet property="textView" destination="UHs-2F-LNl" id="c9y-kY-eM0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="phN-Fo-KJX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="248" y="111"/>
+            <point key="canvasLocation" x="398" y="106"/>
         </scene>
         <!--Two Column-->
         <scene sceneID="lTL-ew-vN5">
@@ -281,7 +331,14 @@
                             <constraint firstItem="y1y-O7-miE" firstAttribute="top" secondItem="KCb-Vo-QJG" secondAttribute="top" id="tyC-x1-9np"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Text Animation" id="IO4-Z1-FCp"/>
+                    <navigationItem key="navigationItem" title="Text Animation" id="IO4-Z1-FCp">
+                        <barButtonItem key="backBarButtonItem" title=" " id="JQg-wt-ejo"/>
+                        <barButtonItem key="rightBarButtonItem" title="CT" id="knK-HR-LMz">
+                            <connections>
+                                <segue destination="Bux-C3-pUQ" kind="show" id="FnK-Di-FUo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="label" destination="rry-9J-xTG" id="ItU-gh-mZG"/>
                     </connections>

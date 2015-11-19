@@ -8,7 +8,7 @@ let cgfont = CGFontCreateWithFontName(fontName)!
 let ctfont = CTFontCreateWithGraphicsFont(cgfont, 16, nil, nil)
 
 // get charactes of the string
-let string = "just test for the effect."
+let string = "just test for the effect. just test for the effect."
 //let length = NSString(string: string).length
 //var chars: UniChar = 0
 //let res = withUnsafeMutablePointer(&chars) { (p) -> [UniChar] in
@@ -74,8 +74,8 @@ let w = textView.frame.width
 
 // calculate the frame when the string is rendered
 let framesetter = CTFramesetterCreateWithAttributedString(attriString)
-var path = CGPathCreateMutable()
-CGPathAddRect(path, nil, CGRect(x: 0, y: 0, width: w, height: CGFloat.max))
+//var path = CGPathCreateMutable()
+//CGPathAddRect(path, nil, CGRect(x: 0, y: 0, width: w, height: CGFloat.max))
 let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, attriString.length), nil, CGSizeMake(w, CGFloat.max), nil)
 let framePath = CGPathCreateWithRect(CGRect(x: 0, y: 0, width: size.width, height: size.height), nil)
 let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attriString.length), framePath, nil)
@@ -129,7 +129,8 @@ for var rIndex = 0; rIndex < runs.count; rIndex++ {
         }
         return ret
     })
-    
+    let dic = CTRunGetAttributes(run)
+    print(dic)
     var glyphRectsInRun = getGlyphRectsForGlyphs(glyphsInRun, font: ctfont)
     
     var glyphPositions = [CGPoint]()
@@ -140,7 +141,7 @@ for var rIndex = 0; rIndex < runs.count; rIndex++ {
             return p.memory
         })
         glyphPositions.append(p)
-        glyphRectsInRun[x].origin.x += p.x
+        glyphRectsInRun[x].origin.x += p.x + origin.x
         let y = glyphRectsInRun[x].origin.y
         let h = glyphRectsInRun[x].height
         glyphRectsInRun[x].origin.y = textView.frame.height - (origin.y + y) - h

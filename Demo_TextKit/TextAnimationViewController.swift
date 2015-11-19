@@ -24,7 +24,7 @@ class TextAnimationViewController: ViewController {
 
         // Do any additional setup after loading the view.
         setup()
-        setupString("just test for the effect, just test for the effect, just test for the effect, just test for the effect")
+        setupString("just test for the effect")
 //        setupString(displayString)
 //        label.attributedText = textStorage
         label.font = UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!
@@ -91,31 +91,14 @@ class TextAnimationViewController: ViewController {
     
     private func display() {
         removeOldLayers()
-        let range = layoutManager.glyphRangeForTextContainer(textContainer)
+//        let range = layoutManager.glyphRangeForTextContainer(textContainer)
+        let gc = layoutManager.numberOfGlyphs
         let origin = CGPoint(x: 20, y: 200)
-        for var i = range.location; i < NSMaxRange(range); {
+        for var i = 0; i < gc; {
             var r = NSMakeRange(i, 1)
             let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
-            print("glyph: \(r)")
-            print("charr: \(charRange)")
             let textForLayer = textStorage.attributedSubstringFromRange(charRange)
-            
             let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
-//            print("text kit  rect: \(glyphRect)")
-            
-//            let uifont = textStorage.attribute(NSFontAttributeName, atIndex: charRange.location, effectiveRange: nil) as! UIFont
-//            let ctfont = CTFontCreateWithNameAndOptions(uifont.fontName, uifont.pointSize, nil, CTFontOptions.Default)
-//            let char = textForLayer.string.substringToIndex(textForLayer.string.startIndex.successor())
-//            var glyph = CTFontGetGlyphWithName(ctfont, char)
-//            var brs: CGRect = CGRectZero
-//            let bb = withUnsafePointer(&glyph, { (pointer: UnsafePointer<CGGlyph>) -> CGRect in
-//                return withUnsafeMutablePointer(&brs, { (p: UnsafeMutablePointer<CGRect>) -> CGRect in
-//                    return CTFontGetBoundingRectsForGlyphs(ctfont, CTFontOrientation.Default, pointer, p, 1)
-//                })
-//            })
-            
-//            CTFontGetBoundingRectsForGlyphs(fon, .kCTFontHorizontalOrientation, &glyph, brs, 1)
-//            print("core text rect: \(bb)")
             var layerFrame: CGRect
             if layers.count == 0 {
                 layerFrame = CGRectMake(origin.x + glyphRect.origin.x, origin.y + glyphRect.origin.y, glyphRect.width, glyphRect.height)
