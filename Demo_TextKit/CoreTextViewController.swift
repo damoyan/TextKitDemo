@@ -17,6 +17,8 @@ class CoreTextViewController: ViewController {
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var height: NSLayoutConstraint!
     
+    var layers = [CALayer]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.layoutManager.delegate = self
@@ -45,14 +47,32 @@ class CoreTextViewController: ViewController {
     }
     
     private func display() {
+        removeOldLayers()
         let layoutManager = textView.layoutManager
         let textContainer = textView.textContainer
         let textContainerInsets = textView.textContainerInset
         let lineFragmentPadding = textContainer.lineFragmentPadding
         let usedRect = layoutManager.usedRectForTextContainer(textContainer)
         print(usedRect)
-        getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding)
-//        print("glyph range: \(layoutManager.numberOfGlyphs)")
+        let rects = getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding)
+        for r in rects {
+        let layer = CALayer()
+            layer.borderColor = UIColor.redColor().CGColor
+            layer.borderWidth = 1 / UIScreen.mainScreen().scale
+            var rect = r
+            rect.origin.x += textContainerInsets.left + lineFragmentPadding
+            rect.origin.y += textContainerInsets.top
+            layer.frame = rect
+            layers.append(layer)
+            textView.layer.addSublayer(layer)
+        }
+    }
+    
+    private func removeOldLayers() {
+        for layer in layers {
+            layer.removeFromSuperlayer()
+        }
+        layers.removeAll()
     }
 }
 
