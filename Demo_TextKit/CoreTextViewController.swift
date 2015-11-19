@@ -11,7 +11,7 @@ import UIKit
 class CoreTextViewController: ViewController {
 
     let shortString = "just test for the effect."
-    let longString = "just test for the effect. just test for the effect. just test for the effect."
+    let longString = "just test for the effect j. just test for the effect. just test for the effect."
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
@@ -21,7 +21,6 @@ class CoreTextViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.layoutManager.delegate = self
         textView.text = longString
         textView.textContainer.widthTracksTextView = true
         textView.textContainer.heightTracksTextView = true
@@ -74,10 +73,4 @@ class CoreTextViewController: ViewController {
         }
         layers.removeAll()
     }
-}
-
-extension CoreTextViewController: NSLayoutManagerDelegate {
-//    func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) {
-//        display()
-//    }
 }
