@@ -9,9 +9,9 @@
 import UIKit
 
 /// get rect of each glyph in the attributedString
-func getGlyphRectsForAttributedString(attriString: NSAttributedString, boundingWidth width: CGFloat) -> [CGRect] {
+func getGlyphRectsForAttributedString(attriString: NSAttributedString, boundingWidth width: CGFloat, needCharactersForGlyph need: Bool = false) -> (glyphCharacters: [String], glyphs: [CGGlyph], glyphRects: [CGRect]) {
     let stringLength = attriString.length
-    // create frame
+    // create frame and get the frame size
     let framesetter = CTFramesetterCreateWithAttributedString(attriString)
     let frameSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, stringLength), nil, CGSize(width: width, height: CGFloat.max), nil)
     let framePath = CGPathCreateWithRect(CGRect(origin: CGPointZero, size: frameSize), nil)
@@ -21,24 +21,45 @@ func getGlyphRectsForAttributedString(attriString: NSAttributedString, boundingW
     let numberOfLines = lines.count
     let lineOrigins = getLineOrigins(frame, numberOfLines: numberOfLines)
     
-    //
+    // handle each run in each line of the frame
+    var glyphCharacters = [String]()
+    var retGlyphs = [CGGlyph]()
     var ret = [CGRect]()
     for var i = 0; i < numberOfLines; i++ {
         let line = lines[i]
         let runs = (CTLineGetGlyphRuns(line) as NSArray) as! [CTRun]
         for run in runs {
+            // 1. get glyph count
             let numberOfGlyphs = CTRunGetGlyphCount(run)
+            
+            // 2. get all glyphs in run
             let glyphs = getGlyphsInRun(run, numberOfGlyphs: numberOfGlyphs)
+            
+            // 3. get font attribute for this run
             let attributes = (CTRunGetAttributes(run) as NSDictionary) as! [String: AnyObject]
             let font = attributes[NSFontAttributeName] as! UIFont
+            
+            // 4. get glyph rect for each glyph in run
             let glyphRects = getGlyphRectsForGlyphs(glyphs, font: CTFontCreateWithName(font.fontName, font.pointSize, nil))
+            
+            // 5. get glyph position for each glyph in run
             let glyphPositions = getGlyphPositionsInRun(run, numberOfGlyphs: numberOfGlyphs)
+            
+            // 6. covert glyph frame info from Core Text to UIKit, since they use different coordinates
             let rectsForUIKit = convertGlyphRectsFromCoreTextToUIKit(glyphRects, glyphPositions: glyphPositions, lineOrigin: lineOrigins[i], frameSize: frameSize)
+            
+            // 7. find the character of each glyph in run if needed
+            if need {
+                let stringRange = CTRunGetStringRange(run)
+                let glyphCharactersInRun = getCorrespondingStringForGlyphsInRun(run, stringRange: NSMakeRange(stringRange.location, stringRange.length), string: attriString.string)
+                glyphCharacters += glyphCharactersInRun
+            }
+            
+            retGlyphs += glyphs
             ret += rectsForUIKit
-            print(glyphRects)
         }
     }
-    return ret
+    return (glyphCharacters, retGlyphs, ret)
 }
 
 /// get origin of each line in thes text frame
@@ -83,16 +104,17 @@ func getGlyphPositionsInRun(run: CTRun, numberOfGlyphs nog: CFIndex) -> [CGPoint
     return ret
 }
 
-/// Core Text's coordinate defers from UIKit.
-///
-func convertGlyphRectsFromCoreTextToUIKit(glyphRects: [CGRect], glyphPositions: [CGPoint], lineOrigin: CGPoint, frameSize: CGSize) -> [CGRect] {
-    var ret = glyphRects
-    for var i = 0; i < glyphRects.count; i++ {
-        let position = glyphPositions[i]
-        let y = glyphRects[i].origin.y
-        let height = glyphRects[i].height
-        ret[i].origin.x += position.x + lineOrigin.x
-        ret[i].origin.y = frameSize.height - y - height - lineOrigin.y
+/// get characters displayed by the glyph
+func getCorrespondingStringForGlyphsInRun(run: CTRun, stringRange: NSRange, string: String) -> [String] {
+    var ret = [String]()
+    let count = CTRunGetGlyphCount(run)
+    let indices = UnsafeMutablePointer<CFIndex>.alloc(count)
+    CTRunGetStringIndices(run, CFRangeMake(0, count), indices)
+    for var i = 0; i < count; i++ {
+        let location = indices[i]
+        let length = (i + 1) < count ? (indices[i + 1] - indices[i]) : (stringRange.location + stringRange.length - indices[i])
+        let str = (string as NSString).substringWithRange(NSMakeRange(location, length))
+        ret.append(str)
     }
     return ret
 }
@@ -113,4 +135,18 @@ func getGlyphRectsForGlyphs(glyphs: [CGGlyph], font: CTFont) -> [CGRect] {
         rects.append(r)
     }
     return rects
+}
+
+/// Core Text's coordinate defers from UIKit.
+///
+func convertGlyphRectsFromCoreTextToUIKit(glyphRects: [CGRect], glyphPositions: [CGPoint], lineOrigin: CGPoint, frameSize: CGSize) -> [CGRect] {
+    var ret = glyphRects
+    for var i = 0; i < glyphRects.count; i++ {
+        let position = glyphPositions[i]
+        let y = glyphRects[i].origin.y
+        let height = glyphRects[i].height
+        ret[i].origin.x += position.x + lineOrigin.x
+        ret[i].origin.y = frameSize.height - y - height - lineOrigin.y
+    }
+    return ret
 }

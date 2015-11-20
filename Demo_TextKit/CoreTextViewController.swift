@@ -16,19 +16,27 @@ class CoreTextViewController: ViewController {
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var height: NSLayoutConstraint!
+    @IBOutlet weak var usedRectLabel: UILabel!
     
     var layers = [CALayer]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.text = longString
+        textView.layer.borderColor = UIColor.blackColor().CGColor
+        textView.layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         textView.textContainer.widthTracksTextView = true
         textView.textContainer.heightTracksTextView = true
-        sliderValueChanged(slider)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        sliderValueChanged(slider)
         display()
     }
 
@@ -51,9 +59,11 @@ class CoreTextViewController: ViewController {
         let textContainer = textView.textContainer
         let textContainerInsets = textView.textContainerInset
         let lineFragmentPadding = textContainer.lineFragmentPadding
+        addLayersForContainer(textContainer)
+        
         let usedRect = layoutManager.usedRectForTextContainer(textContainer)
-        print(usedRect)
-        let rects = getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding)
+        usedRectLabel.text = "used rect: \(usedRect)"
+        let rects = getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding).glyphRects
         for r in rects {
         let layer = CALayer()
             layer.borderColor = UIColor.redColor().CGColor
@@ -65,6 +75,23 @@ class CoreTextViewController: ViewController {
             layers.append(layer)
             textView.layer.addSublayer(layer)
         }
+    }
+    
+    private func addLayersForContainer(textContainer: NSTextContainer) {
+        let textContainerInsets = textView.textContainerInset
+        let lineFragmentPadding = textContainer.lineFragmentPadding
+        let cl = CALayer()
+        cl.frame = CGRect(x: textContainerInsets.left, y: textContainerInsets.top, width: textContainer.size.width, height: textContainer.size.height)
+        cl.borderColor = UIColor.greenColor().CGColor
+        cl.borderWidth = 1 / UIScreen.mainScreen().scale
+        layers.append(cl)
+        textView.layer.addSublayer(cl)
+        let containerLayer = CALayer()
+        containerLayer.frame = CGRect(x: textContainerInsets.left + lineFragmentPadding, y: textContainerInsets.top, width: textContainer.size.width - (lineFragmentPadding * 2), height: textContainer.size.height)
+        containerLayer.borderColor = UIColor.blueColor().CGColor
+        containerLayer.borderWidth = 1 / UIScreen.mainScreen().scale
+        layers.append(containerLayer)
+        textView.layer.addSublayer(containerLayer)
     }
     
     private func removeOldLayers() {
