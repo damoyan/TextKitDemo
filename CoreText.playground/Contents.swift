@@ -2,48 +2,6 @@
 
 import UIKit
 
-class TextLayer: CALayer {
-    
-    var text: NSString!
-    var glyphRect: CGRect!
-    var font: UIFont!
-    
-    init(text: NSString, glyphRect: CGRect, font: UIFont) {
-        self.text = text
-        self.glyphRect = glyphRect
-        self.font = font
-        super.init()
-    }
-    
-    override init(layer: AnyObject) {
-        super.init(layer: layer)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func drawInContext(ctx: CGContext) {
-        super.drawInContext(ctx)
-        CGContextSaveGState(ctx)
-        CGContextSetStrokeColorWithColor(ctx, UIColor.blackColor().CGColor)
-        CGContextSetFillColorWithColor(ctx, UIColor.blackColor().CGColor)
-        let rect = CGRect(origin: CGPointZero, size: glyphRect.size)
-        text.drawWithRect(rect, options: NSStringDrawingOptions(rawValue: 0), attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor()], context: nil)
-        CGContextStrokePath(ctx)
-        CGContextRestoreGState(ctx)
-    }
-}
-
-class View: UIView {
-    override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
-        let s: NSString = "j"
-        s.drawInRect(CGRect(x: 0, y: 0, width: 15, height: 20), withAttributes: [NSForegroundColorAttributeName: UIColor.blackColor(), NSFontAttributeName: UIFont.systemFontOfSize(16)])
-        CGContextStrokePath(context)
-    }
-}
 
 let fontName = "Zapfino"
 let font = UIFont(name: fontName, size: 16)!
@@ -51,7 +9,69 @@ let cgfont = CGFontCreateWithFontName(fontName)!
 let ctfont = CTFontCreateWithGraphicsFont(cgfont, 16, nil, nil)
 
 // get charactes of the string
-let string = "just test for the effect. Zapfino just test for the effect."
+let string = "just test for the effect. Zapfino just test for the effect. just test for the effect. Zapfino just test for the effect."
+let attriString = NSAttributedString(string: string, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor()])
+
+class TLayer: CALayer {
+    let font = cgfont
+    let glyph: CGGlyph?
+    let rect: CGRect?
+    
+    init(glyph: CGGlyph, rect: CGRect) {
+        self.glyph = glyph
+        self.rect = rect
+        super.init()
+    }
+    
+    override init(layer: AnyObject) {
+        if let layer = layer as? TLayer {
+            self.glyph = layer.glyph
+            self.rect = layer.rect
+        } else {
+            self.glyph = nil
+            self.rect = nil
+        }
+        super.init(layer: layer)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func drawInContext(context: CGContext) {
+        CGContextTranslateCTM(context, 0, self.bounds.height)
+        CGContextScaleCTM(context, 1, -1)
+        CGContextSetFont(context, cgfont)
+        CGContextSetFontSize(context, 16)
+        CGContextSetRGBFillColor(context, 0, 0, 0, 1)
+        var position = CGPoint(x: -rect!.origin.x, y: -rect!.origin.y)
+        var glyph = self.glyph!
+        withUnsafePointers(&glyph, &position) { (p1, p2) -> Void in
+            CGContextShowGlyphsAtPositions(context, p1, p2, 1)
+        }
+    }
+}
+
+let testView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
+testView.backgroundColor = UIColor.whiteColor()
+let (glyphs, rects, positions) = getGlyphsAndRects(attributedString: attriString, withboundingWidth: 200)
+for var i = 0; i < glyphs.count; i++ {
+    let glyph = glyphs[i]
+    var rect = rects[i]
+    let tl = TLayer(glyph: glyph, rect: rect)
+    let position = positions[i]
+    rect.origin.x += position.x
+    let y = rect.origin.y + position.y
+    rect.origin.y = testView.bounds.size.height - y - rect.height
+    tl.setNeedsDisplay()
+    tl.borderColor = UIColor.redColor().CGColor
+    tl.borderWidth = 1 / UIScreen.mainScreen().scale
+    tl.frame = rect
+    tl.contentsScale = UIScreen.mainScreen().scale
+    testView.layer.addSublayer(tl)
+}
+testView
+
 //let length = NSString(string: string).length
 //var chars: UniChar = 0
 //let res = withUnsafeMutablePointer(&chars) { (p) -> [UniChar] in
@@ -78,6 +98,11 @@ let string = "just test for the effect. Zapfino just test for the effect."
 //    }
 //    glyphs.append(g)
 //}
+
+
+/*
+
+
 
 // get glyph rect
 func getGlyphRectsForGlyphs(glyphs: [CGGlyph], font: CTFont) -> [CGRect] {
@@ -106,7 +131,6 @@ func getGlyphRectsForGlyphs(glyphs: [CGGlyph], font: CTFont) -> [CGRect] {
 //}
 //var rects = getGlyphRectsForGlyphs(glyphs, font: ctfont)
 
-let attriString = NSAttributedString(string: string, attributes: [NSFontAttributeName: font])
 let textView = UITextView()
 textView.textContainerInset = UIEdgeInsetsZero
 textView.textContainer.lineFragmentPadding = 0
@@ -238,7 +262,7 @@ view.addSubview(textView)
 
 
 
-
+*/
 
 
 
