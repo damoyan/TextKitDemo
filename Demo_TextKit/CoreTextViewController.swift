@@ -62,7 +62,19 @@ class CoreTextViewController: ViewController {
         addLayersForContainer(textContainer)
         
         let usedRect = layoutManager.usedRectForTextContainer(textContainer)
-        usedRectLabel.text = "used rect: \(usedRect)"
+        let boundingRect = layoutManager.boundingRectForGlyphRange(NSMakeRange(0, layoutManager.numberOfGlyphs), inTextContainer: textContainer)
+        usedRectLabel.text = "used rect: \(usedRect) \nboundingRect: \(boundingRect)"
+        usedRectLabel.numberOfLines = 0
+        
+        // add bounding rect with gray color
+        let cl = CALayer()
+        cl.frame = CGRect(x: textContainerInsets.left + boundingRect.origin.x, y: textContainerInsets.top + boundingRect.origin.y, width: boundingRect.size.width, height: boundingRect.size.height)
+        cl.borderColor = UIColor.grayColor().CGColor
+        cl.borderWidth = 1 / UIScreen.mainScreen().scale
+        layers.append(cl)
+        textView.layer.addSublayer(cl)
+        
+        // add layer for each glyph
         let rects = getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding).glyphRects
         for r in rects {
         let layer = CALayer()
