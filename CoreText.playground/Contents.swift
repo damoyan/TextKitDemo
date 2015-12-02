@@ -2,75 +2,85 @@
 
 import UIKit
 
+print(NSForegroundColorAttributeName)
+print(kCTForegroundColorAttributeName)
 
 let fontName = "Zapfino"
 let font = UIFont(name: fontName, size: 16)!
-let cgfont = CGFontCreateWithFontName(fontName)!
-let ctfont = CTFontCreateWithGraphicsFont(cgfont, 16, nil, nil)
+print(font.descender)
+let mutable = NSMutableAttributedString(string: "abcd", attributes: nil)
+let att = NSTextAttachment(data: nil, ofType: nil)
+att.image = UIImage(named: "bank_g")
+//let attString = NSAttributedString(attachment: att)
+mutable.addAttribute(NSAttachmentAttributeName, value: att, range: NSMakeRange(0, 2))
+print(mutable)
+mutable.fixAttributesInRange(NSMakeRange(0, mutable.length))
+print(mutable)
+//let cgfont = CGFontCreateWithFontName(fontName)!
+//let ctfont = CTFontCreateWithGraphicsFont(cgfont, 16, nil, nil)
+//
+//// get charactes of the string
+//let string = "just test for the effect. Zapfino just test for the effect. just test for the effect. Zapfino just test for the effect."
+//let attriString = NSAttributedString(string: string, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor()])
+//
+//class TLayer: CALayer {
+//    let font = cgfont
+//    let glyph: CGGlyph?
+//    let rect: CGRect?
+//    
+//    init(glyph: CGGlyph, rect: CGRect) {
+//        self.glyph = glyph
+//        self.rect = rect
+//        super.init()
+//    }
+//    
+//    override init(layer: AnyObject) {
+//        if let layer = layer as? TLayer {
+//            self.glyph = layer.glyph
+//            self.rect = layer.rect
+//        } else {
+//            self.glyph = nil
+//            self.rect = nil
+//        }
+//        super.init(layer: layer)
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//    
+//    override func drawInContext(context: CGContext) {
+//        CGContextTranslateCTM(context, 0, self.bounds.height)
+//        CGContextScaleCTM(context, 1, -1)
+//        CGContextSetFont(context, cgfont)
+//        CGContextSetFontSize(context, 16)
+//        CGContextSetRGBFillColor(context, 0, 0, 0, 1)
+//        var position = CGPoint(x: -rect!.origin.x, y: -rect!.origin.y)
+//        var glyph = self.glyph!
+//        withUnsafePointers(&glyph, &position) { (p1, p2) -> Void in
+//            CGContextShowGlyphsAtPositions(context, p1, p2, 1)
+//        }
+//    }
+//}
+//let scale = UIScreen.mainScreen().scale
+//let testView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
+//testView.backgroundColor = UIColor.whiteColor()
 
-// get charactes of the string
-let string = "just test for the effect. Zapfino just test for the effect. just test for the effect. Zapfino just test for the effect."
-let attriString = NSAttributedString(string: string, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor()])
-
-class TLayer: CALayer {
-    let font = cgfont
-    let glyph: CGGlyph?
-    let rect: CGRect?
-    
-    init(glyph: CGGlyph, rect: CGRect) {
-        self.glyph = glyph
-        self.rect = rect
-        super.init()
-    }
-    
-    override init(layer: AnyObject) {
-        if let layer = layer as? TLayer {
-            self.glyph = layer.glyph
-            self.rect = layer.rect
-        } else {
-            self.glyph = nil
-            self.rect = nil
-        }
-        super.init(layer: layer)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func drawInContext(context: CGContext) {
-        CGContextTranslateCTM(context, 0, self.bounds.height)
-        CGContextScaleCTM(context, 1, -1)
-        CGContextSetFont(context, cgfont)
-        CGContextSetFontSize(context, 16)
-        CGContextSetRGBFillColor(context, 0, 0, 0, 1)
-        var position = CGPoint(x: -rect!.origin.x, y: -rect!.origin.y)
-        var glyph = self.glyph!
-        withUnsafePointers(&glyph, &position) { (p1, p2) -> Void in
-            CGContextShowGlyphsAtPositions(context, p1, p2, 1)
-        }
-    }
-}
-
-let testView = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
-testView.backgroundColor = UIColor.whiteColor()
-let (glyphs, rects, positions) = getGlyphsAndRects(attributedString: attriString, withboundingWidth: 200)
-for var i = 0; i < glyphs.count; i++ {
-    let glyph = glyphs[i]
-    var rect = rects[i]
-    let tl = TLayer(glyph: glyph, rect: rect)
-    let position = positions[i]
-    rect.origin.x += position.x
-    let y = rect.origin.y + position.y
-    rect.origin.y = testView.bounds.size.height - y - rect.height
-    tl.setNeedsDisplay()
-    tl.borderColor = UIColor.redColor().CGColor
-    tl.borderWidth = 1 / UIScreen.mainScreen().scale
-    tl.frame = rect
-    tl.contentsScale = UIScreen.mainScreen().scale
-    testView.layer.addSublayer(tl)
-}
-testView
+//let (_, glyphs, glyphRects, uikitRects) = getGlyphRectsForAttributedString(attriString, boundingWidth: 200)
+//let contentOffset: CGPoint = CGPoint(x: 30, y: 20)
+//for var i = 0; i < glyphs.count; i++ {
+//    let glyph = glyphs[i]
+//    var glyphRect = glyphRects[i]
+//    var frame = uikitRects[i]
+//    let l = TLayer(glyph: glyph, rect: glyphRect)
+//    l.frame = frame.offsetBy(dx: contentOffset.x, dy: contentOffset.y)
+//    l.borderColor = UIColor.redColor().CGColor
+//    l.borderWidth = 1 / scale
+//    l.contentsScale = scale
+//    l.setNeedsDisplay()
+//    testView.layer.addSublayer(l)
+//}
+//testView
 
 //let length = NSString(string: string).length
 //var chars: UniChar = 0
