@@ -26,6 +26,7 @@
 		B3B8302E1BFC65E900F60678 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302D1BFC65E900F60678 /* TextViewController.swift */; };
 		B3B830301BFC6ACE00F60678 /* CoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */; };
 		B3B830321BFDAFA000F60678 /* CoreTextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B830311BFDAFA000F60678 /* CoreTextHelper.swift */; };
+		B3BC8A0B1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BC8A0A1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		B3B8302D1BFC65E900F60678 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextViewController.swift; sourceTree = "<group>"; };
 		B3B830311BFDAFA000F60678 /* CoreTextHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextHelper.swift; sourceTree = "<group>"; };
+		B3BC8A0A1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawUsingCoreTextViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				B3A868021C0D3D180035AC76 /* RunDelegate.h */,
 				B3A868031C0D3D180035AC76 /* RunDelegate.m */,
 				B3A868011C0D3D170035AC76 /* Demo_TextKit-Bridging-Header.h */,
+				B3BC8A0A1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				B3B8302C1BFC463B00F60678 /* TextView.swift in Sources */,
 				B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */,
 				B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */,
+				B3BC8A0B1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift in Sources */,
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
 				B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */,
 				B3B830321BFDAFA000F60678 /* CoreTextHelper.swift in Sources */,
