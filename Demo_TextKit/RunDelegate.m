@@ -14,7 +14,7 @@ NSMutableAttributedString* generateRunDelegate(NSMutableAttributedString *attriS
     if (delegate.ascent < 0) {
         delegate.ascent = 0;
     }
-    delegate.descent = font.descender;
+    delegate.descent = -font.descender;
     delegate.width = image.size.width;
     [attriString addAttribute:(id)kCTRunDelegateAttributeName value:(__bridge id)delegate.CTRunDelegate range:range];
     return attriString;
@@ -34,12 +34,14 @@ static CGFloat GetAscentCallback(void *ref) {
 
 static CGFloat GetDescentCallback(void *ref) {
     RunDelegate *delegate = (__bridge RunDelegate *)ref;
-    printf("%f", delegate.descent);
     return delegate.descent;
 }
 
+static int count = 0;
 static CGFloat GetWidthCallback(void *ref) {
     RunDelegate *delegate = (__bridge RunDelegate *)ref;
+    count++;
+    printf("%d\n", count);
     return delegate.width;
 }
 

@@ -4,16 +4,17 @@ import UIKit
 
 print(NSForegroundColorAttributeName)
 print(kCTForegroundColorAttributeName)
-
-let fontName = "Zapfino"
-let font = UIFont(name: fontName, size: 16)!
-print(font.descender)
-let mutable = NSMutableAttributedString(string: "abcd", attributes: nil)
-let att = NSTextAttachment(data: nil, ofType: nil)
-att.image = UIImage(named: "bank_g")
-//let attString = NSAttributedString(attachment: att)
-mutable.addAttribute(NSAttachmentAttributeName, value: att, range: NSMakeRange(0, 2))
-print(mutable)
+//var rect = CGRect(x: 0, y: 0, width: 100, height: 100)
+//rect = CGRectApplyAffineTransform(rect, CGAffineTransformMakeScale(1, -1))
+//let fontName = "Zapfino"
+//let font = UIFont(name: fontName, size: 16)!
+//print(font.descender)
+let mutable = NSMutableAttributedString(string: "abcd\nghkl", attributes: nil)
+let style = NSMutableParagraphStyle()
+style.lineSpacing = 10
+style.paragraphSpacing = 20
+style.paragraphSpacingBefore = 30
+mutable.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSMakeRange(0, mutable.length))
 mutable.fixAttributesInRange(NSMakeRange(0, mutable.length))
 print(mutable)
 //let cgfont = CGFontCreateWithFontName(fontName)!

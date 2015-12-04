@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "515044E4178BD1B624A231CA546278D53D10AAFA",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "515044E4178BD1B624A231CA546278D53D10AAFA" : 0,
+    "EE572E37216C86DBCAC86493955253680F5C4662" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0BC5B3F2-629A-48E9-A08A-42E43A2DF919",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "515044E4178BD1B624A231CA546278D53D10AAFA" : "Demo_TextKit\/",
+    "EE572E37216C86DBCAC86493955253680F5C4662" : "YYText\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Demo_TextKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Demo_TextKit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:damoyan\/TextKitDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "515044E4178BD1B624A231CA546278D53D10AAFA"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ibireme\/YYText.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE572E37216C86DBCAC86493955253680F5C4662"
+    }
+  ]
+}

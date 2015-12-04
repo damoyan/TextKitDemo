@@ -84,6 +84,7 @@ public func getGlyphRectsForAttributedString(attriString: NSAttributedString, bo
 public func getGlyphsAndRects(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (glyphs: [CGGlyph], rects: [CGRect], positions: [CGPoint]) {
     let frameInfo = createFrame(attributedString: attriString, withboundingWidth: width)
     let (lines, lineOrigins) = getLinesInfo(frameInfo.frame)
+    print("-----------\(lineOrigins)")
     let numberOfLines = lines.count
     
     var glyphRet = [CGGlyph]()
@@ -114,14 +115,80 @@ public func getGlyphsAndRects(attributedString attriString: NSAttributedString, 
     return (glyphRet, rectRet, positionRet)
 }
 
-/// create frame and get the frame size
+/// create frame and get the frame size(suggest frame size)
 public func createFrame(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (frame: CTFrame, size: CGSize) {
+    let d = NSDate()
     let stringLength = attriString.length
     let framesetter = CTFramesetterCreateWithAttributedString(attriString)
     let frameSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, stringLength), nil, CGSize(width: width, height: CGFloat.max), nil)
     let framePath = CGPathCreateWithRect(CGRect(origin: CGPointZero, size: frameSize), nil)
     let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, stringLength), framePath, nil)
+    print("time: \(NSDate().timeIntervalSinceDate(d))")
     return (frame, frameSize)
+}
+
+private func CFRangeEqual(r1: CFRange, _ r2: CFRange) -> Bool {
+    if r1.location == r2.location && r1.length == r2.length {
+        return true
+    }
+    return false
+}
+
+/// create frame and get the frame size(calculate size)
+public func createFrameInfo(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (frame: CTFrame, size: CGSize, attachmentsInfo: [NSTextAttachment: CGRect], height: CGFloat) {
+    let d = NSDate()
+    let totalRange = CFRangeMake(0, attriString.length)
+    var frameSize = CGSize(width: width, height: 0)
+    var attachments = [NSTextAttachment: CGRect]()
+    let framesetter = CTFramesetterCreateWithAttributedString(attriString)
+    var height: CGFloat = 1_000
+    var frame: CTFrame!
+    var realRange = CFRangeMake(0, 0)
+    var isFinished = false
+    while !isFinished {
+        let rect = CGRect(x: 0, y: 0, width: width, height: height)
+        let path = CGPathCreateWithRect(rect, nil)
+        frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
+        realRange = CTFrameGetVisibleStringRange(frame)
+        if CFRangeEqual(realRange, totalRange) {
+           isFinished = true
+        } else {
+            height *= 2
+        }
+    }
+    print("time: \(NSDate().timeIntervalSinceDate(d))")
+//    print("height: \(height)")
+    let (lines, lineOrigins) = getLinesInfo(frame)
+    var newOrigins = lineOrigins
+    let numberOfLines = lines.count
+    for var i = numberOfLines - 1; i >= 0; i-- {
+        let line = lines[i]
+        let originY = height - lineOrigins[i].y
+        let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions(rawValue: 0))
+//        print("CTLineGetBoundsWithOptions: \(bounds)")
+        if i == numberOfLines - 1 { //last
+           frameSize.height = originY - bounds.origin.y
+        }
+        newOrigins[i].y = frameSize.height - originY
+//        print("lineOrigin:\(i) - \(newOrigins[i])")
+        let runs = (CTLineGetGlyphRuns(line) as NSArray) as! [CTRun]
+        for run in runs {
+            if let attributes = (CTRunGetAttributes(run) as NSDictionary) as? [String: AnyObject], attachment = attributes[NSAttachmentAttributeName] as? NSTextAttachment {
+                var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
+                let width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading))
+                let bounds = CGRect(x: 0, y: -descent, width: width, height: ascent + descent)
+                var position = CGPointZero
+                CTRunGetPositions(run, CFRangeMake(0, 1), &position)
+                let rect = CGRect(x: lineOrigins[i].x + position.x, y: lineOrigins[i].y + position.y + bounds.origin.y, width: bounds.width, height: bounds.height)
+//                print("Attachment rect: \(rect)")
+//                print("******************************************************")
+                attachments[attachment] = rect
+            }
+        }
+//        print("===============================================================================================")
+    }
+//    print(frameSize)
+    return (frame, frameSize, attachments, height)
 }
 
 /// get lines array and orogin for the given frame
