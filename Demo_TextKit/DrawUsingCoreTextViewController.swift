@@ -74,8 +74,6 @@ class CoreTextView: UIView {
                     let frame = CGRect(x: rect.origin.x, y: height - rect.origin.y - rect.height, width: rect.width, height: rect.height)
                     let view = UIImageView(frame: frame)
                     view.image = attachment.image
-    //                let view = UIView(frame: frame)
-    //                view.backgroundColor = UIColor.greenColor()
                     addSubview(view)
                 }
             }

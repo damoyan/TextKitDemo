@@ -23,7 +23,6 @@ class CoreTextViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        textView.text = longString
         let mutable = NSMutableAttributedString(string: longString, attributes: [NSFontAttributeName: textView.font!])
         let attachment = NSTextAttachment(data: nil, ofType: nil)
         attachment.image = UIImage(named: "test")
@@ -62,56 +61,6 @@ class CoreTextViewController: ViewController {
         textView.sizeToFit()
         height.constant = textView.frame.size.height
     }
-    
-//    class RunDelegate: NSObject, NSCoding, NSCopying {
-//        var ascent: CGFloat?
-//        var descent: CGFloat?
-//        var width: CGFloat?
-//        
-//        override init() {
-//            super.init()
-//        }
-//        
-//        required init?(coder aDecoder: NSCoder) {
-//            ascent = aDecoder.decodeObjectForKey("ascent") as? CGFloat
-//            descent = aDecoder.decodeObjectForKey("descent") as? CGFloat
-//            width = aDecoder.decodeObjectForKey("width") as? CGFloat
-//        }
-//        
-//        func encodeWithCoder(aCoder: NSCoder) {
-//            aCoder.encodeObject(ascent, forKey: "ascent")
-//            aCoder.encodeObject(descent, forKey: "descent")
-//            aCoder.encodeObject(width, forKey: "width")
-//        }
-//        
-//        func copyWithZone(zone: NSZone) -> AnyObject {
-//            let one = RunDelegate()
-//            one.ascent = self.ascent
-//            one.descent = self.descent
-//            one.width = self.width
-//            return one
-//        }
-//    }
-    
-//    private func generateRunDelegate(image: UIImage, font: UIFont) -> CTRunDelegateRef {
-//        var d = RunDelegate(image: image, andFont: font)
-//        d.ascent = image.size.height + font.descender
-//        d.descent = -font.descender
-//        d.width = image.size.width
-//        var cbs = CTRunDelegateCallbacks(version: kCTRunDelegateCurrentVersion, dealloc: { (p) -> Void in
-//            
-//            }, getAscent: { (p) -> CGFloat in
-//                let d = UnsafeMutablePointer<RunDelegate>(p).memory
-//                return d.ascent
-//            }, getDescent: { (p) -> CGFloat in
-//                let d = UnsafeMutablePointer<RunDelegate>(p).memory
-//                return d.descent
-//            }) { (p) -> CGFloat in
-//                let d = UnsafeMutablePointer<RunDelegate>(p).memory
-//                return d.width
-//        }
-//        return CTRunDelegateCreate(&cbs, &d)!
-//    }
     
     private func display() {
         removeOldLayers()

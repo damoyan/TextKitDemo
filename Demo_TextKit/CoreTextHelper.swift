@@ -136,7 +136,6 @@ private func CFRangeEqual(r1: CFRange, _ r2: CFRange) -> Bool {
 
 /// create frame and get the frame size(calculate size)
 public func createFrameInfo(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (frame: CTFrame, size: CGSize, attachmentsInfo: [NSTextAttachment: CGRect], height: CGFloat) {
-    let d = NSDate()
     let totalRange = CFRangeMake(0, attriString.length)
     var frameSize = CGSize(width: width, height: 0)
     var attachments = [NSTextAttachment: CGRect]()
@@ -156,21 +155,21 @@ public func createFrameInfo(attributedString attriString: NSAttributedString, wi
             height *= 2
         }
     }
-    print("time: \(NSDate().timeIntervalSinceDate(d))")
-//    print("height: \(height)")
     let (lines, lineOrigins) = getLinesInfo(frame)
     var newOrigins = lineOrigins
     let numberOfLines = lines.count
     for var i = numberOfLines - 1; i >= 0; i-- {
         let line = lines[i]
         let originY = height - lineOrigins[i].y
+        // 这个bounds的height实际上是不包括attachment的高度的, 只是文字的高度.
+        // attacment的高度实际上在上一行的origin信息里面会有反应. 
+        // e.g. 有两行文字1和2, 2行中有attachment, 那么获取1行origin的时候, origin.y
+        //   就是根据attachment的高度以及对齐方式, 在2行origin的基础上算的
         let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions(rawValue: 0))
-//        print("CTLineGetBoundsWithOptions: \(bounds)")
         if i == numberOfLines - 1 { //last
            frameSize.height = originY - bounds.origin.y
         }
         newOrigins[i].y = frameSize.height - originY
-//        print("lineOrigin:\(i) - \(newOrigins[i])")
         let runs = (CTLineGetGlyphRuns(line) as NSArray) as! [CTRun]
         for run in runs {
             if let attributes = (CTRunGetAttributes(run) as NSDictionary) as? [String: AnyObject], attachment = attributes[NSAttachmentAttributeName] as? NSTextAttachment {
@@ -180,14 +179,10 @@ public func createFrameInfo(attributedString attriString: NSAttributedString, wi
                 var position = CGPointZero
                 CTRunGetPositions(run, CFRangeMake(0, 1), &position)
                 let rect = CGRect(x: lineOrigins[i].x + position.x, y: lineOrigins[i].y + position.y + bounds.origin.y, width: bounds.width, height: bounds.height)
-//                print("Attachment rect: \(rect)")
-//                print("******************************************************")
                 attachments[attachment] = rect
             }
         }
-//        print("===============================================================================================")
     }
-//    print(frameSize)
     return (frame, frameSize, attachments, height)
 }
 

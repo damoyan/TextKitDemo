@@ -18,6 +18,7 @@
 		B3745A661BF1B7CA001EA3B2 /* ExclusionPathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */; };
 		B3745A681BF1B80C001EA3B2 /* TextAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */; };
 		B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A691BF1CCFB001EA3B2 /* Constant.swift */; };
+		B38329191C1531A40098A5D1 /* AttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38329181C1531A40098A5D1 /* AttachmentViewController.swift */; };
 		B388C3211BF9D20100F59C5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3745A451BF19BB1001EA3B2 /* Main.storyboard */; };
 		B3A868041C0D3D180035AC76 /* RunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3A868031C0D3D180035AC76 /* RunDelegate.m */; };
 		B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B830271BFAFE2D00F60678 /* TextCell.swift */; };
@@ -56,6 +57,7 @@
 		B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExclusionPathViewController.swift; sourceTree = "<group>"; };
 		B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextAnimationViewController.swift; sourceTree = "<group>"; };
 		B3745A691BF1CCFB001EA3B2 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B38329181C1531A40098A5D1 /* AttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentViewController.swift; sourceTree = "<group>"; };
 		B3A868011C0D3D170035AC76 /* Demo_TextKit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo_TextKit-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3A868021C0D3D180035AC76 /* RunDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunDelegate.h; sourceTree = "<group>"; };
 		B3A868031C0D3D180035AC76 /* RunDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunDelegate.m; sourceTree = "<group>"; };
@@ -117,12 +119,9 @@
 				B3745A631BF1B4E4001EA3B2 /* NavigationController.swift */,
 				B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */,
 				B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */,
+				B383291A1C1531DC0098A5D1 /* Interactive */,
+				B38329181C1531A40098A5D1 /* AttachmentViewController.swift */,
 				B3745A691BF1CCFB001EA3B2 /* Constant.swift */,
-				B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */,
-				B3B830271BFAFE2D00F60678 /* TextCell.swift */,
-				B3B830291BFAFE4900F60678 /* TextCell.xib */,
-				B3B8302B1BFC463B00F60678 /* TextView.swift */,
-				B3B8302D1BFC65E900F60678 /* TextViewController.swift */,
 				B3B8302F1BFC6ACE00F60678 /* CoreTextViewController.swift */,
 				B3B830311BFDAFA000F60678 /* CoreTextHelper.swift */,
 				B3A868021C0D3D180035AC76 /* RunDelegate.h */,
@@ -156,6 +155,18 @@
 				B3745A561BF19BB1001EA3B2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B383291A1C1531DC0098A5D1 /* Interactive */ = {
+			isa = PBXGroup;
+			children = (
+				B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */,
+				B3B830271BFAFE2D00F60678 /* TextCell.swift */,
+				B3B830291BFAFE4900F60678 /* TextCell.xib */,
+				B3B8302B1BFC463B00F60678 /* TextView.swift */,
+				B3B8302D1BFC65E900F60678 /* TextViewController.swift */,
+			);
+			name = Interactive;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B8302E1BFC65E900F60678 /* TextViewController.swift in Sources */,
+				B38329191C1531A40098A5D1 /* AttachmentViewController.swift in Sources */,
 				B3B830281BFAFE2D00F60678 /* TextCell.swift in Sources */,
 				B3B8302C1BFC463B00F60678 /* TextView.swift in Sources */,
 				B3745A6A1BF1CCFB001EA3B2 /* Constant.swift in Sources */,
