@@ -25,11 +25,16 @@ TextKit通过这个类提供文字的排版服务, 但是这个类有几个方�
 
 #### boundingRectForGlyphRange()
 
-这个函数返回的rect实际上并不是`glyph`的实际占用大小. (它返回的宽度是`advance`, 高度是行高. 从表现看像是这两个值, 但是我没有验证.) 所以要获取`glyph`的实际占用大小, 还是要用CoreText的API.
+返回的rect是相对于`textContainer`的坐标系原点的rect(即`textContainer`的左上角). 需要注意的是, 这个值并不包括`textView`的`textContainerInsets`.
+这个函数返回的rect实际上并不是`glyph`的实际占用大小. (它返回的宽度是`advance`, 高度是行高. ) 所以要获取`glyph`的实际占用大小, 还是要用CoreText的API.
+
+#### locationForGlyphAtIndex()
+
+返回的location是`glyph`的`origin`(上面Glyph Metric图里面的)相对于`glyph`所在行的`origin`(左上角)的偏移. 需要注意的是, 这个`location`已经包含了`lineFragmentPadding`了, 所以使用时不需要再转换一次了.
 
 #### characterRangeForGlyphRange()/glyphRangeForCharacterRange()
 
-和上面的`numberOfGlyphs`一样, 这两个函数的返回值一样有问题. 只适用于`glyph`和`character`是一一对应的这种情况. 当不是一一对应时, 返回值都有问题. 两个函数返回的`range`的`length`实际上都是`glyph`对应的`character`的`length`. 比如在`Zapfino`字体中, `the`对应一个`glyph`, 返回的`glyphrange`的`length`应该是1, 但是实际是3. 这样导致我去获取对应的`glyph`的时候拿到的并不是`the`对应的那个`glyph`, 而是`t`, `h`, `e`这三个`character`分别对应的三个`glyph`
+和上面的`numberOfGlyphs`一样, 这两个函数的返回值一样有问题. 只适用于`glyph`和`character`是一一对应的这种情况. 当不是一一对应时, 返回值都有问题. 两个函数返回的`range`的`length`实际上都是`glyph`对应的`character`的`length`. 比如在`Zapfino`字体中, `the`对应一个`glyph`, 返回的`glyphrange`的`length`应该是1, 但是实际是3. 但是用`layoutManager.CGGlyphAtIndex(glyphRange.location)`函数去获取`glyph`的时候, 拿到的`glyph`是对的.
 
 #### usedRectForTextContainer()/boundingRectForGlyphRange:InTextContainer()
 
@@ -38,6 +43,8 @@ TextKit通过这个类提供文字的排版服务, 但是这个类有几个方�
 ## Tips
 
 1. 当`textStorage`发生变化的时候会trigger `layoutManager`重新layout. 比如`textStorage.setAttributedString()`等类似操作
+
+2. `invalidateLayoutForCharacterRange`也会trigger `layoutManager`重新layout
 
 ## Lisence
 
