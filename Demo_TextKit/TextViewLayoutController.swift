@@ -12,7 +12,7 @@ class TextViewLayoutController: ViewController {
 
     let shortString = "just test for the effect."
     let longString = "just test for the effect j. "
-    let longString2 = "just test for the effect. just test for the effect."
+    let longString2 = "just test for the Zapfino effect. just test for the effect."
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var currentLabel: UILabel!
     @IBOutlet weak var slider: UISlider!
