@@ -16,9 +16,7 @@ class TextAnimationViewController: ViewController {
     let layoutManager = NSLayoutManager()
     let textContainer = NSTextContainer()
     var layers = [CALayer]()
-//    var font = UIFont(name: "Zapfino", size: 16)!
-    // UIFont(name: "TimesNewRomanPS-ItalicMT", size: 16)!
-    var font = UIFont.systemFontOfSize(16)
+    var font = UIFont(name: "Zapfino", size: 16)!
     
     var showBorder = false
     
@@ -98,43 +96,49 @@ class TextAnimationViewController: ViewController {
     
     private func display() {
         removeOldLayers()
+        guard let textStorage = layoutManager.textStorage else { return }
         let gc = layoutManager.numberOfGlyphs
         let origin = CGPoint(x: 20, y: 200)
         for var i = 0; i < gc; {
             var r = NSMakeRange(i, 1)
+            // 为了拿到实际的glyphRange, 调用之后, r的length就会根据实际情况变化, 不一定是1
             let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
-            let textForLayer = textStorage.attributedSubstringFromRange(charRange)
-            let glyphRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
-            createLayer(textForLayer, glyphRect: glyphRect, origin: origin)
+            if let _ = textStorage.attribute(NSAttachmentAttributeName, atIndex: charRange.location, effectiveRange: nil) as? NSTextAttachment {
+                // TODO: handle attachment
+            } else {
+                // textStorage在使用钱会fixAttributed, 所以font信息一定会有
+                let font = textStorage.attribute(NSFontAttributeName, atIndex: charRange.location, effectiveRange: nil) as! UIFont
+                let ctfont = CTFontCreateWithName(font.fontName, font.pointSize, nil)
+                
+                // 得到r对应的glyph
+                let glyph = layoutManager.CGGlyphAtIndex(r.location, isValidIndex: nil)
+                
+                // 调用CoreText的方法来获得对应的glyph的绘制矩形. 这个矩形是上下文无关的
+                // glyphRect的坐标系是CoreText的坐标系
+                var glyphRect = getGlyphRectsForGlyphs([glyph], forFont: ctfont)[0]
+                
+                let location = layoutManager.locationForGlyphAtIndex(r.location)
+                
+                // boundingRect返回的是glyph在textContainer的location(boundingRect.origin),
+                // glyph的advance (boundingRect.width)和当前行的行高(boundingRect.height)
+                let boundingRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
+                
+                // 把glyphRect转换到UIKit的坐标系
+                glyphRect.origin.x += boundingRect.origin.x
+                glyphRect.origin.y = boundingRect.origin.y + location.y - glyphRect.origin.y - glyphRect.height
+                glyphRect.origin.x += origin.x
+                glyphRect.origin.y += origin.y
+                
+                createLayer(glyph, frame: glyphRect, font: font)
+            }
             i += r.length
         }
     }
     
-    private func createLayer(textForLayer: NSAttributedString, glyphRect: CGRect, origin: CGPoint) {
-        var layerFrame: CGRect
-        if layers.count == 0 {
-            layerFrame = CGRectMake(origin.x + glyphRect.origin.x, origin.y + glyphRect.origin.y, glyphRect.width, glyphRect.height)
-        } else {
-            if !showBorder {
-                layerFrame = CGRectMake(origin.x + glyphRect.origin.x - (glyphRect.width * 5), origin.y + glyphRect.origin.y, glyphRect.width * 11, glyphRect.height)
-            } else {
-                layerFrame = CGRectMake(origin.x + glyphRect.origin.x, origin.y + glyphRect.origin.y, glyphRect.width, glyphRect.height)
-            }
-        }
-        let textLayer = CATextLayer()
-        /// if set `string` with NSAttributedString, we still need to set the `font` and `fontSize` property
-        /// or the characters displayed will be a little bolder than original font.
-        /// note: when set NSAttributedString without font attribute to NSTextStorage, it will automatically add NSFontAttribute with default font.
-        textLayer.string = textForLayer
-        if let font = textForLayer.attribute(NSFontAttributeName, atIndex: 0, effectiveRange: nil) as? UIFont {
-            textLayer.font = CTFontCreateWithName(font.fontName, font.pointSize, nil)
-            textLayer.fontSize = font.pointSize
-        }
-        textLayer.alignmentMode = kCAAlignmentCenter
-        textLayer.foregroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1).CGColor
-        textLayer.frame = layerFrame
+    private func createLayer(glyph: CGGlyph, frame: CGRect, font: UIFont) {
+        let textLayer = SingleGlyphLayer(glyph: glyph, font: font)
+        textLayer.frame = frame
         textLayer.opacity = 0
-        textLayer.wrapped = true
         if showBorder {
             textLayer.borderColor = UIColor.redColor().CGColor
             textLayer.borderWidth = 1 / UIScreen.mainScreen().scale

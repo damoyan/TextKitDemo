@@ -12,7 +12,6 @@ import UIKit
 public func getGlyphRectsForAttributedString(attriString: NSAttributedString, boundingWidth width: CGFloat, needCharactersForGlyph need: Bool = false) -> (glyphCharacters: [String], glyphs: [CGGlyph], glyphRects: [CGRect], glyphUIKitRects: [CGRect]) {
     
     let (frame, frameSize) = createFrame(attributedString: attriString, withboundingWidth: width)
-    print(frameSize)
     // get line info
     let (lines, lineOrigins) = getLinesInfo(frame)
     let numberOfLines = lines.count
@@ -28,11 +27,12 @@ public func getGlyphRectsForAttributedString(attriString: NSAttributedString, bo
         for run in runs {
             // 1. get glyph count
             let numberOfGlyphs = CTRunGetGlyphCount(run)
-            print("numberOfGlyphs: \(numberOfGlyphs)")
             
             // 2. get all glyphs in run
             let glyphs = getGlyphsInRun(run, numberOfGlyphs: numberOfGlyphs)
-            print(glyphs)
+            
+            var advances = [CGSize](count: numberOfGlyphs, repeatedValue: CGSizeZero)
+            CTRunGetAdvances(run, CFRangeMake(0, 0), &advances)
             
             // if the run is attachment
             if numberOfGlyphs == 1 && glyphs.count == 1 && glyphs[0] == 1 {
@@ -42,27 +42,19 @@ public func getGlyphRectsForAttributedString(attriString: NSAttributedString, bo
                 var descent: CGFloat = 0
                 var leading: CGFloat = 0
                 let width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading)
-                print("position: \(position)")
-                print("ascent: \(ascent)")
-                print("descent: \(descent)")
-                print("width: \(width)")
-                let rect = CGRect(x: 0, y: 0, width: CGFloat(width), height: ascent - descent)
+                let rect = CGRect(x: 0, y: 0, width: CGFloat(width), height: ascent + descent)
                 let rectsForUIKit = convertGlyphRectsFromCoreTextToUIKit([rect], glyphPositions: [position], lineOrigin: lineOrigins[i], frameSize: frameSize)
-                print(rectsForUIKit)
                 glyphRectRet.append(rect)
                 uikitRet += rectsForUIKit
             } else {
                 // 4. get glyph rect for each glyph in run
                 let glyphRects = getGlyphRectsForGlyphs(glyphs, inRun: run)
-                print(glyphRects)
                 
                 // 5. get glyph position for each glyph in run
                 let glyphPositions = getGlyphPositionsInRun(run, numberOfGlyphs: numberOfGlyphs)
-                print(glyphPositions)
                 
                 // 6. covert glyph frame info from Core Text to UIKit, since they use different coordinates
                 let rectsForUIKit = convertGlyphRectsFromCoreTextToUIKit(glyphRects, glyphPositions: glyphPositions, lineOrigin: lineOrigins[i], frameSize: frameSize)
-                print(rectsForUIKit)
                 
                 // 7. find the character of each glyph in run if needed
                 if need {
@@ -84,7 +76,6 @@ public func getGlyphRectsForAttributedString(attriString: NSAttributedString, bo
 public func getGlyphsAndRects(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (glyphs: [CGGlyph], rects: [CGRect], positions: [CGPoint]) {
     let frameInfo = createFrame(attributedString: attriString, withboundingWidth: width)
     let (lines, lineOrigins) = getLinesInfo(frameInfo.frame)
-    print("-----------\(lineOrigins)")
     let numberOfLines = lines.count
     
     var glyphRet = [CGGlyph]()
@@ -117,13 +108,11 @@ public func getGlyphsAndRects(attributedString attriString: NSAttributedString, 
 
 /// create frame and get the frame size(suggest frame size)
 public func createFrame(attributedString attriString: NSAttributedString, withboundingWidth width: CGFloat) -> (frame: CTFrame, size: CGSize) {
-    let d = NSDate()
     let stringLength = attriString.length
     let framesetter = CTFramesetterCreateWithAttributedString(attriString)
     let frameSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, stringLength), nil, CGSize(width: width, height: CGFloat.max), nil)
     let framePath = CGPathCreateWithRect(CGRect(origin: CGPointZero, size: frameSize), nil)
     let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, stringLength), framePath, nil)
-    print("time: \(NSDate().timeIntervalSinceDate(d))")
     return (frame, frameSize)
 }
 
@@ -259,6 +248,11 @@ public func getGlyphRectsForGlyphs(glyphs: [CGGlyph], inRun run: CTRun) -> [CGRe
     let attributes = (CTRunGetAttributes(run) as NSDictionary) as! [String: AnyObject]
     let uifont = attributes[NSFontAttributeName] as! UIFont
     let font = CTFontCreateWithName(uifont.fontName, uifont.pointSize, nil)
+    return getGlyphRectsForGlyphs(glyphs, forFont: font)
+}
+
+/// get glyphs bounding rect for the given font
+public func getGlyphRectsForGlyphs(glyphs: [CGGlyph], forFont font: CTFont) -> [CGRect] {
     var rect:CGRect = CGRectZero
     var rects = [CGRect]()
     for var i = 0; i < glyphs.count; i++ {

@@ -132,10 +132,10 @@
             </objects>
             <point key="canvasLocation" x="-159" y="111"/>
         </scene>
-        <!--Core Text-->
+        <!--TextView Layout-->
         <scene sceneID="Ho0-2F-34M">
             <objects>
-                <viewController id="Bux-C3-pUQ" customClass="CoreTextViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Bux-C3-pUQ" customClass="TextViewLayoutController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GTb-WO-S7K"/>
                         <viewControllerLayoutGuide type="bottom" id="BWg-Yg-mRy"/>
@@ -203,7 +203,7 @@
                             <constraint firstAttribute="trailing" secondItem="UHs-2F-LNl" secondAttribute="trailing" id="ujl-HF-2X3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Core Text" id="SNR-aN-kh6"/>
+                    <navigationItem key="navigationItem" title="TextView Layout" id="SNR-aN-kh6"/>
                     <connections>
                         <outlet property="currentLabel" destination="V6d-IJ-I0U" id="XIn-Fc-kim"/>
                         <outlet property="height" destination="uQd-4H-4Xm" id="cpW-Ts-qyQ"/>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoreTextViewController: ViewController {
+class TextViewLayoutController: ViewController {
 
     let shortString = "just test for the effect."
     let longString = "just test for the effect j. "
@@ -20,6 +20,7 @@ class CoreTextViewController: ViewController {
     @IBOutlet weak var usedRectLabel: UILabel!
     
     var layers = [CALayer]()
+    let imageSize = CGSizeMake(20, 20)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,10 @@ class CoreTextViewController: ViewController {
         let attachment = NSTextAttachment(data: nil, ofType: nil)
         attachment.image = UIImage(named: "test")
         attachment.bounds = CGRect(origin: CGPointZero, size: attachment.image!.size)
+        attachment.bounds = CGRect(origin: CGPoint(x: 0, y: -10), size: imageSize)
         let attachmentString = NSAttributedString(attachment: attachment)
-        let mutableAttach = NSMutableAttributedString(attributedString: attachmentString)
-        mutable.appendAttributedString(generateRunDelegate(mutableAttach, attachment.image!, textView.font!, NSMakeRange(0, 1)))
+        mutable.appendAttributedString(attachmentString)
+        mutable.appendAttributedString(attachmentString)
         mutable.appendAttributedString(NSAttributedString(string: longString2, attributes: [NSFontAttributeName: textView.font!]))
         textView.attributedText = mutable
         textView.layer.borderColor = UIColor.blackColor().CGColor
@@ -37,6 +39,7 @@ class CoreTextViewController: ViewController {
         textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
         textView.textContainer.widthTracksTextView = true
         textView.textContainer.heightTracksTextView = true
+        slider.value = 40
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,8 +69,8 @@ class CoreTextViewController: ViewController {
         removeOldLayers()
         let layoutManager = textView.layoutManager
         let textContainer = textView.textContainer
+        let textStorage = textView.textStorage
         let textContainerInsets = textView.textContainerInset
-        let lineFragmentPadding = textContainer.lineFragmentPadding
         addLayersForContainer(textContainer)
         
         let usedRect = layoutManager.usedRectForTextContainer(textContainer)
@@ -82,20 +85,46 @@ class CoreTextViewController: ViewController {
         cl.borderWidth = 1 / UIScreen.mainScreen().scale
         layers.append(cl)
         textView.layer.addSublayer(cl)
-        
-        // add layer for each glyph
-        let rects = getGlyphRectsForAttributedString(textView.textStorage, boundingWidth: textContainer.size.width - lineFragmentPadding - lineFragmentPadding).glyphUIKitRects
-        for r in rects {
-            let layer = CALayer()
-            layer.borderColor = UIColor.redColor().CGColor
-            layer.borderWidth = 1 / UIScreen.mainScreen().scale
-            var rect = r
-            rect.origin.x += textContainerInsets.left + lineFragmentPadding
-            rect.origin.y += textContainerInsets.top
-            layer.frame = rect
-            layers.append(layer)
-            textView.layer.addSublayer(layer)
+        let gc = layoutManager.numberOfGlyphs
+        for var i = 0; i < gc; {
+            var r = NSMakeRange(i, 1)
+            let charRange = layoutManager.characterRangeForGlyphRange(r, actualGlyphRange: &r)
+            let font = textStorage.attribute(NSFontAttributeName, atIndex: charRange.location, effectiveRange: nil) as! UIFont
+            let ctfont = CTFontCreateWithName(font.fontName, font.pointSize, nil)
+            
+            // glyphRect is based on CoreText Coordinator
+            var glyphRect = getGlyphRectsForGlyphs([layoutManager.CGGlyphAtIndex(r.location, isValidIndex: nil)], forFont: ctfont)[0]
+            // location是glyph的origin相对于当前行origin的偏移
+            let location = layoutManager.locationForGlyphAtIndex(r.location)
+
+            // boundingRect的origin是相对于textContainer的, 而不是当前行的
+            let boundingRect = layoutManager.boundingRectForGlyphRange(r, inTextContainer: textContainer)
+            
+            if CGSizeEqualToSize(glyphRect.size, CGSizeZero) && boundingRect.width > 9.0 {
+                glyphRect.size = imageSize
+            }
+            // rebase origin to textContainer
+            glyphRect.origin.x += boundingRect.origin.x
+            
+            // boundingRect.origin.y + location.y: glyph的origin相对于textContainer的origin的位置
+            // boundingRect.origin.y + location.y - glyphRect.origin.y: glyph图形左下角相对于textContainer的origin的位置
+            // boundingRect.origin.y + location.y - glyphRect.origin.y - glyphRect.height: glyph的右上角相对于textContainer的origin的位置
+            glyphRect.origin.y = boundingRect.origin.y + location.y - glyphRect.origin.y - glyphRect.height
+            // rebase origin to text view
+            glyphRect.origin.x += textContainerInsets.left
+            glyphRect.origin.y += textContainerInsets.top
+            addBorderLayer(glyphRect)
+            i += r.length
         }
+    }
+    
+    private func addBorderLayer(frame: CGRect) {
+        let layer = CALayer()
+        layer.borderColor = UIColor.redColor().CGColor
+        layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        layer.frame = frame
+        layers.append(layer)
+        textView.layer.addSublayer(layer)
     }
     
     private func addLayersForContainer(textContainer: NSTextContainer) {
