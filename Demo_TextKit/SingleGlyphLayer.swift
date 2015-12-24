@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// 用来画一个glyph
 class SingleGlyphLayer: CALayer {
    
     let glyph: CGGlyph

@@ -11,7 +11,10 @@ import UIKit
 class AttachmentViewController: UIViewController {
 
     let attachment = NSTextAttachment()
+    let attachment2 = NSTextAttachment()
+    let image = UIImage(named: "1")
     var textView: UITextView!
+    let imageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,10 +23,12 @@ class AttachmentViewController: UIViewController {
         setup()
         
         attachment.image = UIImage(named: "test")
+        attachment2.image = image
         let attachmentString = NSAttributedString(attachment: attachment)
         let mutable = NSMutableAttributedString(string: "just test", attributes: [NSFontAttributeName: textView.font!])
         mutable.appendAttributedString(attachmentString)
         mutable.appendAttributedString(NSAttributedString(string: "the effect, add more character to generate a new line", attributes: [NSFontAttributeName: textView.font!]))
+        mutable.appendAttributedString(NSAttributedString(attachment: attachment2))
         let para = NSMutableParagraphStyle()
         para.lineSpacing = 0
         mutable.addAttribute(NSParagraphStyleAttributeName, value: para, range: NSMakeRange(0, mutable.length))
@@ -81,10 +86,22 @@ class AttachmentViewController: UIViewController {
         textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         view.addSubview(textView)
         self.textView = textView
+        textView.layoutManager.delegate = self
+        imageView.frame = CGRectZero
+        imageView.animationDuration = 0.5
+        imageView.animationImages = [UIImage(named: "1")!, UIImage(named: "2")!]
+        imageView.startAnimating()
+        textView.addSubview(imageView)
     }
     
     @objc private func changeAlignment(sender: UIButton) {
         let tag = sender.tag
+        adjustAttachment(attachment, tag: tag)
+        adjustAttachment(attachment2, tag: tag)
+        textView.layoutManager.invalidateLayoutForCharacterRange(NSMakeRange(10, 1), actualCharacterRange: nil)
+    }
+    
+    private func adjustAttachment(attachment: NSTextAttachment, tag: Int) {
         let font = textView.font!
         let size = attachment.image!.size
         let fontLineHeight = font.ascender - font.descender
@@ -97,6 +114,22 @@ class AttachmentViewController: UIViewController {
         } else if tag == 3 {
             attachment.bounds = CGRect(origin: CGPointZero, size: size)
         }
-        textView.layoutManager.invalidateLayoutForCharacterRange(NSMakeRange(10, 1), actualCharacterRange: nil)
+    }
+}
+
+extension AttachmentViewController: NSLayoutManagerDelegate {
+    func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) {
+        let str = textView.attributedText
+        let glyphIndex = layoutManager.glyphIndexForCharacterAtIndex(str.length - 1)
+        let locationInLine = layoutManager.locationForGlyphAtIndex(glyphIndex)
+        print(locationInLine)
+        let boundingRect = layoutManager.boundingRectForGlyphRange(NSMakeRange(glyphIndex, 1), inTextContainer: textContainer!)
+        print(boundingRect)
+        let size = attachment2.image!.size
+        var ret = CGRectZero
+        ret.origin.x = textView.textContainerInset.left + boundingRect.origin.x
+        ret.origin.y = textView.textContainerInset.top + boundingRect.origin.y + locationInLine.y - size.height
+        ret.size = size
+        imageView.frame = ret
     }
 }

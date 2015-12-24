@@ -16,7 +16,8 @@ class TextAnimationViewController: ViewController {
     let layoutManager = NSLayoutManager()
     let textContainer = NSTextContainer()
     var layers = [CALayer]()
-    var font = UIFont(name: "Zapfino", size: 16)!
+//    var font = UIFont(name: "Zapfino", size: 16)!
+    var font = UIFont.systemFontOfSize(16)
     
     var showBorder = false
     
@@ -24,7 +25,7 @@ class TextAnimationViewController: ViewController {
         super.viewDidLoad()
 
         setup()
-        setupString("just test for the effect")
+        setupString("just test for the effect Zapfino")
         label.font = font
     }
     
@@ -44,7 +45,7 @@ class TextAnimationViewController: ViewController {
             font = UIFont(name: "Zapfino", size: 16)!
         }
         label.font = font
-        setupString("just test for the effect")
+        setupString("just test for the effect Zapfino")
     }
     
     @IBAction func tapButton(sender: AnyObject) {
@@ -97,6 +98,7 @@ class TextAnimationViewController: ViewController {
     private func display() {
         removeOldLayers()
         guard let textStorage = layoutManager.textStorage else { return }
+        layoutManager.ensureLayoutForTextContainer(layoutManager.textContainers[0])
         let gc = layoutManager.numberOfGlyphs
         let origin = CGPoint(x: 20, y: 200)
         for var i = 0; i < gc; {
