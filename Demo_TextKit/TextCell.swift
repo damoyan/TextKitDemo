@@ -11,21 +11,31 @@ import UIKit
 class TextCell: UITableViewCell {
 
     @IBOutlet weak var textView: TextView!
+    @IBOutlet weak var grLabel: UILabel!
+    @IBOutlet weak var seLabel: UILabel!
+    
+    var gestureRecognizer: UITapGestureRecognizer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        textView.layer.borderWidth = 1
+        textView.layer.borderColor = UIColor.grayColor().CGColor
         textView.delegate = self
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleGesture:")
+        gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleGesture:")
         textView.addGestureRecognizer(gestureRecognizer)
         gestureRecognizer.delaysTouchesBegan = true
     }
     
     override func prepareForReuse() {
-        textView.selectable = true
+        textView.selectable = false
     }
-    
-    func update(attriString: NSAttributedString) {
+
+    func update(attriString: NSAttributedString, gs: Bool, se: Bool) {
         textView.attributedText = attriString
+        gestureRecognizer.enabled = gs
+        textView.selectable = se
+        grLabel.text = "gesture: \(gs)"
+        seLabel.text = "textView selectable: \(se)"
     }
     
     @objc private func handleGesture(gestureRecognizer: UITapGestureRecognizer) {
@@ -44,6 +54,24 @@ class TextCell: UITableViewCell {
                 }
                 return
             }
+        }
+    }
+    
+    @IBAction func toggleGesture(sender: UIButton) {
+        gestureRecognizer.enabled = !gestureRecognizer.enabled
+        if gestureRecognizer.enabled {
+            sender.setTitle("disableGesture", forState: .Normal)
+        } else {
+            sender.setTitle("enableGesture", forState: .Normal)
+        }
+    }
+    
+    @IBAction func toggleSelectable(sender: UIButton) {
+        textView.selectable = !textView.selectable
+        if textView.selectable {
+            sender.setTitle("disableSelectable", forState: .Normal)
+        } else {
+            sender.setTitle("enableSelectable", forState: .Normal)
         }
     }
     

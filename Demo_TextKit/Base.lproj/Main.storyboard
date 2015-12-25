@@ -116,6 +116,26 @@
                                             <segue destination="8wj-BF-Hgl" kind="show" id="eLO-SV-0ro"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="t5c-zn-8B1" style="IBUITableViewCellStyleDefault" id="V2T-lG-nxg">
+                                        <rect key="frame" x="0.0" y="284" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V2T-lG-nxg" id="7bZ-Kc-wuQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Custom Drawing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="t5c-zn-8B1">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="70b-ut-1iJ" kind="show" id="MOV-eW-ExV"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -344,15 +364,32 @@
                                             <action selector="toggleFont:" destination="j2e-cW-MnU" eventType="touchUpInside" id="jHY-Py-lgA"/>
                                         </connections>
                                     </button>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eA8-0k-wg9">
+                                        <rect key="frame" x="263" y="125" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="toggleLineBorder:" destination="j2e-cW-MnU" eventType="valueChanged" id="4bo-5e-BKo"/>
+                                        </connections>
+                                    </switch>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7L-zv-PaZ">
+                                        <rect key="frame" x="258" y="8" width="46" height="30"/>
+                                        <state key="normal" title="toggleLigature"/>
+                                        <connections>
+                                            <action selector="toggleLigature:" destination="j2e-cW-MnU" eventType="touchUpInside" id="974-c4-o76"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="91L-k1-c6A" secondAttribute="trailing" id="309-GV-0CV"/>
                                     <constraint firstItem="7Jj-vQ-Qm2" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="top" constant="8" id="61A-pp-22V"/>
                                     <constraint firstItem="H8T-KR-0hU" firstAttribute="centerX" secondItem="y1y-O7-miE" secondAttribute="centerX" constant="50" id="7De-Yx-FrO"/>
                                     <constraint firstAttribute="bottom" secondItem="HII-tR-YHV" secondAttribute="bottom" constant="12" id="Jqo-77-ES1"/>
+                                    <constraint firstItem="U7L-zv-PaZ" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="top" constant="8" id="Oi3-S0-Kxb"/>
                                     <constraint firstItem="91L-k1-c6A" firstAttribute="leading" secondItem="y1y-O7-miE" secondAttribute="leading" id="PkF-UH-Yg0"/>
+                                    <constraint firstAttribute="trailing" secondItem="U7L-zv-PaZ" secondAttribute="trailing" constant="16" id="d8K-iY-bQa"/>
                                     <constraint firstItem="H8T-KR-0hU" firstAttribute="centerY" secondItem="HII-tR-YHV" secondAttribute="centerY" id="dtE-7A-N7N"/>
+                                    <constraint firstItem="eA8-0k-wg9" firstAttribute="centerY" secondItem="H8T-KR-0hU" secondAttribute="centerY" id="fYG-Z2-wOA"/>
                                     <constraint firstItem="7Jj-vQ-Qm2" firstAttribute="leading" secondItem="y1y-O7-miE" secondAttribute="leading" constant="8" id="ifo-vJ-64g"/>
+                                    <constraint firstAttribute="trailing" secondItem="eA8-0k-wg9" secondAttribute="trailing" constant="8" id="nbY-eH-a1c"/>
                                     <constraint firstAttribute="centerX" secondItem="HII-tR-YHV" secondAttribute="centerX" constant="50" id="pp9-mA-jeW"/>
                                     <constraint firstItem="HII-tR-YHV" firstAttribute="top" secondItem="91L-k1-c6A" secondAttribute="bottom" constant="7.5" id="tuN-BL-PIc"/>
                                     <constraint firstItem="91L-k1-c6A" firstAttribute="top" secondItem="y1y-O7-miE" secondAttribute="top" constant="64" id="voJ-y4-heo"/>
@@ -436,6 +473,25 @@
             </objects>
             <point key="canvasLocation" x="754" y="859"/>
         </scene>
+        <!--Custom Draw View Controller-->
+        <scene sceneID="Yd3-XD-zcq">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="70b-ut-1iJ" customClass="CustomDrawViewController" customModule="Demo_TextKit" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vcP-YI-3Mt"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tlt-n7-geW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wi5-Uk-9ak">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xs7-br-mDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="242" y="111"/>
+        </scene>
         <!--Draw Using Core Text View Controller-->
         <scene sceneID="H02-RG-af0">
             <objects>
@@ -458,7 +514,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="373" y="111"/>
+            <point key="canvasLocation" x="898" y="111"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gyO-B0-ps9">

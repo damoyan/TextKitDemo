@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3163D871C2D1B0000C0F831 /* CustomDrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3163D861C2D1B0000C0F831 /* CustomDrawViewController.swift */; };
+		B3163D891C2D1B6800C0F831 /* CustomLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3163D881C2D1B6800C0F831 /* CustomLayoutManager.swift */; };
 		B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */; };
 		B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A411BF19BB1001EA3B2 /* AppDelegate.swift */; };
 		B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3745A431BF19BB1001EA3B2 /* ViewController.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B3163D861C2D1B0000C0F831 /* CustomDrawViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDrawViewController.swift; sourceTree = "<group>"; };
+		B3163D881C2D1B6800C0F831 /* CustomLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLayoutManager.swift; sourceTree = "<group>"; };
 		B329D9B21BFAD05B00E23A46 /* InteractViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractViewController.swift; sourceTree = "<group>"; };
 		B3745A3C1BF19BB1001EA3B2 /* Demo_TextKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_TextKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3745A401BF19BB1001EA3B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,13 +120,14 @@
 				B3745A451BF19BB1001EA3B2 /* Main.storyboard */,
 				B3745A481BF19BB1001EA3B2 /* Images.xcassets */,
 				B3745A4A1BF19BB1001EA3B2 /* LaunchScreen.xib */,
-				B3745A3F1BF19BB1001EA3B2 /* Supporting Files */,
 				B3745A611BF1A2A6001EA3B2 /* TwoColumnViewController.swift */,
 				B3745A631BF1B4E4001EA3B2 /* NavigationController.swift */,
 				B3745A651BF1B7CA001EA3B2 /* ExclusionPathViewController.swift */,
 				B3745A671BF1B80C001EA3B2 /* TextAnimationViewController.swift */,
 				B383291A1C1531DC0098A5D1 /* Interactive */,
 				B38329181C1531A40098A5D1 /* AttachmentViewController.swift */,
+				B3163D861C2D1B0000C0F831 /* CustomDrawViewController.swift */,
+				B3163D881C2D1B6800C0F831 /* CustomLayoutManager.swift */,
 				B3745A691BF1CCFB001EA3B2 /* Constant.swift */,
 				B3B8302F1BFC6ACE00F60678 /* TextViewLayoutController.swift */,
 				B3B830311BFDAFA000F60678 /* CoreTextHelper.swift */,
@@ -131,6 +136,7 @@
 				B3A868011C0D3D170035AC76 /* Demo_TextKit-Bridging-Header.h */,
 				B3BC8A0A1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift */,
 				B383291B1C17D20C0098A5D1 /* SingleGlyphLayer.swift */,
+				B3745A3F1BF19BB1001EA3B2 /* Supporting Files */,
 			);
 			path = Demo_TextKit;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 				B3BC8A0B1C101A4A00193FA6 /* DrawUsingCoreTextViewController.swift in Sources */,
 				B3745A621BF1A2A6001EA3B2 /* TwoColumnViewController.swift in Sources */,
 				B329D9B31BFAD05B00E23A46 /* InteractViewController.swift in Sources */,
+				B3163D891C2D1B6800C0F831 /* CustomLayoutManager.swift in Sources */,
 				B3B830321BFDAFA000F60678 /* CoreTextHelper.swift in Sources */,
 				B3A868041C0D3D180035AC76 /* RunDelegate.m in Sources */,
 				B3745A641BF1B4E4001EA3B2 /* NavigationController.swift in Sources */,
@@ -291,6 +298,7 @@
 				B3745A441BF19BB1001EA3B2 /* ViewController.swift in Sources */,
 				B3745A661BF1B7CA001EA3B2 /* ExclusionPathViewController.swift in Sources */,
 				B3745A421BF19BB1001EA3B2 /* AppDelegate.swift in Sources */,
+				B3163D871C2D1B0000C0F831 /* CustomDrawViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

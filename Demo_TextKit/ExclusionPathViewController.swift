@@ -17,19 +17,13 @@ class ExclusionPathViewController: ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.textContainer.widthTracksTextView = true
-        textView.textContainer.heightTracksTextView = true
+        textView.textContainer.lineBreakMode = .ByTruncatingTail
         textView.text = displayString
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateExclusionPath(textView.textContainer)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     private func updateExclusionPath(textContainer: NSTextContainer) {

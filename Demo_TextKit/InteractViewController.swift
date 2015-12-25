@@ -28,7 +28,7 @@ class InteractViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,7 +42,16 @@ class InteractViewController: UITableViewController {
         res.appendAttributedString(attri)
         res.appendAttributedString(b)
         res.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(16), range: NSMakeRange(0, res.length))
-        cell.update(res)
+        switch indexPath.section {
+        case 0:
+            cell.update(res, gs: true, se: true)
+        case 1:
+            cell.update(res, gs: false, se: true)
+        case 2:
+            cell.update(res, gs: true, se: false)
+        default:
+            cell.update(res, gs: false, se: false)
+        }
         return cell
     }
     

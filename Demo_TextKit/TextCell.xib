@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,12 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="276.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOe-gt-jBQ">
-                        <rect key="frame" x="137" y="166" width="46" height="110.5"/>
-                        <state key="normal" title="Button"/>
-                    </button>
-                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plK-vK-Kyc" customClass="TextView" customModule="Demo_TextKit" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="158"/>
+                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="plK-vK-Kyc" customClass="TextView" customModule="Demo_TextKit" customModuleProvider="target">
+                        <rect key="frame" x="12" y="8" width="296" height="35.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <attributedString key="attributedText">
                             <fragment content="just test for the www.baidu.com. heheh">
@@ -32,17 +28,39 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fq-8n-nWi">
+                        <rect key="frame" x="266" y="149" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XxE-Rv-8BB">
+                        <rect key="frame" x="12" y="51" width="42" height="217.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="plK-vK-Kyc" firstAttribute="leading" secondItem="t34-gL-54h" secondAttribute="leading" id="RX5-dO-9Kg"/>
-                    <constraint firstAttribute="trailing" secondItem="plK-vK-Kyc" secondAttribute="trailing" id="X9D-Ap-TBR"/>
-                    <constraint firstAttribute="bottom" secondItem="OOe-gt-jBQ" secondAttribute="bottom" id="XCu-5c-tI8"/>
-                    <constraint firstItem="OOe-gt-jBQ" firstAttribute="centerX" secondItem="t34-gL-54h" secondAttribute="centerX" id="aOc-i8-nel"/>
-                    <constraint firstItem="OOe-gt-jBQ" firstAttribute="top" secondItem="plK-vK-Kyc" secondAttribute="bottom" id="iiq-zK-8pM"/>
-                    <constraint firstItem="plK-vK-Kyc" firstAttribute="top" secondItem="t34-gL-54h" secondAttribute="top" id="s2h-yw-sQi"/>
+                    <constraint firstAttribute="trailing" secondItem="8Fq-8n-nWi" secondAttribute="trailing" constant="12" id="9oY-kJ-Ccp"/>
+                    <constraint firstItem="XxE-Rv-8BB" firstAttribute="top" secondItem="plK-vK-Kyc" secondAttribute="bottom" constant="8" id="Ef8-2v-pLl"/>
+                    <constraint firstItem="8Fq-8n-nWi" firstAttribute="centerY" secondItem="XxE-Rv-8BB" secondAttribute="centerY" id="IWg-Kj-IIi"/>
+                    <constraint firstItem="plK-vK-Kyc" firstAttribute="leading" secondItem="t34-gL-54h" secondAttribute="leading" constant="12" id="RX5-dO-9Kg"/>
+                    <constraint firstAttribute="trailing" secondItem="plK-vK-Kyc" secondAttribute="trailing" constant="12" id="X9D-Ap-TBR"/>
+                    <constraint firstItem="plK-vK-Kyc" firstAttribute="top" secondItem="t34-gL-54h" secondAttribute="top" constant="8" id="s2h-yw-sQi"/>
+                    <constraint firstAttribute="bottom" secondItem="XxE-Rv-8BB" secondAttribute="bottom" constant="8" id="sWI-vC-Yde"/>
+                    <constraint firstItem="XxE-Rv-8BB" firstAttribute="leading" secondItem="t34-gL-54h" secondAttribute="leading" constant="12" id="uQr-dr-oOU"/>
+                    <constraint firstItem="XxE-Rv-8BB" firstAttribute="centerX" secondItem="t34-gL-54h" secondAttribute="centerX" id="wVa-db-N0w"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="wVa-db-N0w"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="grLabel" destination="XxE-Rv-8BB" id="PTK-br-qt1"/>
+                <outlet property="seLabel" destination="8Fq-8n-nWi" id="uWb-CV-m0o"/>
                 <outlet property="textView" destination="plK-vK-Kyc" id="RJB-JH-r1t"/>
             </connections>
             <point key="canvasLocation" x="227" y="225.5"/>

@@ -20,6 +20,7 @@ class TextAnimationViewController: ViewController {
     var font = UIFont.systemFontOfSize(16)
     
     var showBorder = false
+    var useLigature = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,11 @@ class TextAnimationViewController: ViewController {
         setupString("just test for the effect Zapfino")
     }
     
+    @IBAction func toggleLigature(sender: UIButton) {
+        useLigature = !useLigature
+        setupString("just test for the effect Zapfino", useLigature: useLigature)
+    }
+    
     @IBAction func tapButton(sender: AnyObject) {
         animation()
     }
@@ -56,6 +62,20 @@ class TextAnimationViewController: ViewController {
         showBorder = sender.on
         display()
         animation()
+    }
+    
+    var showLineBorder = false
+    @IBAction func toggleLineBorder(sender: UISwitch) {
+        showLineBorder = sender.on
+        linelayers.forEach {
+            if self.showLineBorder {
+                $0.borderColor = UIColor.blueColor().CGColor
+                $0.borderWidth = 1 / UIScreen.mainScreen().scale
+            } else {
+                $0.borderColor = UIColor.clearColor().CGColor
+                $0.borderWidth = 0
+            }
+        }
     }
     
     private func animation() {
@@ -68,7 +88,7 @@ class TextAnimationViewController: ViewController {
                 CATransaction.begin()
                 CATransaction.setDisableActions(true)
                 CATransaction.setAnimationDuration(duration)
-                CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut))
+                CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn))
                 l.opacity = 1
                 l.setNeedsDisplay()
                 CATransaction.commit()
@@ -81,6 +101,8 @@ class TextAnimationViewController: ViewController {
             layer.removeFromSuperlayer()
         }
         layers.removeAll(keepCapacity: true)
+        linelayers.forEach { $0.removeFromSuperlayer() }
+        linelayers.removeAll(keepCapacity: true)
     }
     
     private func setup() {
@@ -90,8 +112,11 @@ class TextAnimationViewController: ViewController {
         layoutManager.delegate = self
     }
 
-    private func setupString(string: String) {
-        let attri = NSAttributedString(string: string, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
+    private func setupString(string: String, useLigature: Bool = true) {
+        let attri = NSMutableAttributedString(string: string, attributes: [NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)])
+        if !useLigature {
+            attri.addAttribute(NSLigatureAttributeName, value: 0, range: NSMakeRange(0, attri.length))
+        }
         textStorage.setAttributedString(attri)
     }
     
@@ -132,8 +157,21 @@ class TextAnimationViewController: ViewController {
                 glyphRect.origin.y += origin.y
                 
                 createLayer(glyph, frame: glyphRect, font: font)
+                var rect = boundingRect
+                rect.origin.x += origin.x
+                rect.origin.y += origin.y + 100
+                let text = (textStorage.string as NSString).substringWithRange(charRange)
+                createTextLayer(text, frame: rect, font: font)
             }
             i += r.length
+        }
+        layoutManager.enumerateLineFragmentsForGlyphRange(NSMakeRange(0, gc)) { (line, usedRect, tc, range, _) -> Void in
+            var l1 = line
+            l1.origin.x += origin.x
+            l1.origin.y += origin.y
+            self.createLineLayer(l1)
+            l1.origin.y += 100
+            self.createLineLayer(l1)
         }
     }
     
@@ -148,6 +186,38 @@ class TextAnimationViewController: ViewController {
         textLayer.contentsScale = UIScreen.mainScreen().scale
         view.layer.addSublayer(textLayer)
         layers.append(textLayer)
+    }
+    
+    private func createTextLayer(text: String, frame: CGRect, font: UIFont) {
+        let textLayer = CATextLayer()
+        textLayer.frame = frame
+        textLayer.string = text
+        textLayer.font = CGFontCreateWithFontName(font.fontName)
+        textLayer.fontSize = font.pointSize
+        textLayer.foregroundColor = UIColor.blackColor().CGColor
+        textLayer.opacity = 0
+        textLayer.opaque = false
+        textLayer.masksToBounds = false
+        if showBorder {
+            textLayer.borderColor = UIColor.redColor().CGColor
+            textLayer.borderWidth = 1 / UIScreen.mainScreen().scale
+        }
+        textLayer.contentsScale = UIScreen.mainScreen().scale
+        view.layer.addSublayer(textLayer)
+        textLayer.setNeedsDisplay()
+        layers.append(textLayer)
+    }
+    
+    var linelayers = [CALayer]()
+    private func createLineLayer(frame: CGRect) {
+        let layer = CALayer()
+        layer.frame = frame
+        if showLineBorder {
+            layer.borderColor = UIColor.blueColor().CGColor
+            layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        }
+        view.layer.addSublayer(layer)
+        linelayers.append(layer)
     }
 }
 

@@ -31,11 +31,7 @@ class TwoColumnViewController: ViewController {
     private func setupTextView() {
         textStorage.addLayoutManager(layoutManager)
         let leftTextContainer = NSTextContainer()
-        leftTextContainer.widthTracksTextView = true
-        leftTextContainer.heightTracksTextView = true
         let rightTextContainer = NSTextContainer()
-        rightTextContainer.widthTracksTextView = true
-        rightTextContainer.heightTracksTextView = true
         layoutManager.addTextContainer(leftTextContainer)
         layoutManager.addTextContainer(rightTextContainer)
         leftTextView = UITextView(frame: CGRectZero, textContainer: leftTextContainer)

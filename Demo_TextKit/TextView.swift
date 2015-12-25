@@ -15,20 +15,20 @@ class TextView: UITextView {
         return false
     }
 
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-        selectedTextRange = nil
-        let locInView = CGPointMake(point.x - textContainerInset.left, point.y - textContainerInset.top)
-        let glyphIndex = layoutManager.glyphIndexForPoint(locInView, inTextContainer: textContainer)
-        let glyphRect = layoutManager.boundingRectForGlyphRange(NSMakeRange(glyphIndex, 1), inTextContainer: textContainer)
-        if CGRectContainsPoint(glyphRect, point) {
-            let charIndex = layoutManager.characterIndexForPoint(point, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-            var range: NSRange = NSRange()
-            if let _ = textStorage.attribute(NSLinkAttributeName, atIndex: charIndex, effectiveRange: &range)
-            {
-                return true
-            }
-        }
-        return false
-    }
+//    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+//        selectedTextRange = nil
+//        let locInView = CGPointMake(point.x - textContainerInset.left, point.y - textContainerInset.top)
+//        let glyphIndex = layoutManager.glyphIndexForPoint(locInView, inTextContainer: textContainer)
+//        let glyphRect = layoutManager.boundingRectForGlyphRange(NSMakeRange(glyphIndex, 1), inTextContainer: textContainer)
+//        if CGRectContainsPoint(glyphRect, point) {
+//            let charIndex = layoutManager.characterIndexForPoint(point, inTextContainer: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+//            var range: NSRange = NSRange()
+//            if let _ = textStorage.attribute(NSLinkAttributeName, atIndex: charIndex, effectiveRange: &range)
+//            {
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 }
