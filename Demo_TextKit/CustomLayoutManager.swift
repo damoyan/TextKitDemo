@@ -8,9 +8,27 @@
 
 import UIKit
 
+protocol AttachmentInfoDelegate: NSLayoutManagerDelegate {
+    func layoutManagerShouldGenerateAttachmentInfo(layoutManager: NSLayoutManager) -> Bool
+    func layoutManager(layoutManager: NSLayoutManager, shouldGenerateInfoForAttachment attachment: NSTextAttachment) -> Bool
+    func layoutManager(layoutManager: NSLayoutManager, didGetFrame frame: CGRect, forAttachment attachment: NSTextAttachment)
+}
+
+extension AttachmentInfoDelegate {
+    func layoutManagerShouldGenerateAttachmentInfo(layoutManager: NSLayoutManager) -> Bool {
+        return false
+    }
+    
+    func layoutManager(layoutManager: NSLayoutManager, shouldGenerateInfoForAttachment attachment: NSTextAttachment) -> Bool {
+        return false
+    }
+    
+    /// `frame` is in `textContainer` coordinator, if using in `textView`, you should translate to `textView` coordinator
+    func layoutManager(layoutManager: NSLayoutManager, didGetFrame frame: CGRect, forAttachment attachment: NSTextAttachment) {
+    }
+}
+
 class CustomLayoutManager: NSLayoutManager {
-    
-    
     
     override func drawBackgroundForGlyphRange(glyphsToShow: NSRange, atPoint origin: CGPoint) {
         super.drawBackgroundForGlyphRange(glyphsToShow, atPoint: origin)

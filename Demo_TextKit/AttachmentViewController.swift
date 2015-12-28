@@ -117,19 +117,48 @@ class AttachmentViewController: UIViewController {
     }
 }
 
-extension AttachmentViewController: NSLayoutManagerDelegate {
+extension AttachmentViewController: AttachmentInfoDelegate {
+    
+    func layoutManagerShouldGenerateAttachmentInfo(layoutManager: NSLayoutManager) -> Bool {
+        return true
+    }
+    
+    func layoutManager(layoutManager: NSLayoutManager, shouldGenerateInfoForAttachment attachment: NSTextAttachment) -> Bool {
+        if attachment ==  attachment2 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func layoutManager(layoutManager: NSLayoutManager, didGetFrame frame: CGRect, forAttachment attachment: NSTextAttachment) {
+        if attachment == attachment2 {
+            var f = frame
+            f.origin.x += textView.textContainerInset.left
+            f.origin.y += textView.textContainerInset.top
+            self.imageView.frame = f
+        }
+    }
+    
     func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) {
+        guard let textContainer = textContainer else { return }
+        guard let delegate = layoutManager.delegate as? AttachmentInfoDelegate else { return }
+        guard delegate.layoutManagerShouldGenerateAttachmentInfo(layoutManager) else { return }
         let str = textView.attributedText
-        let glyphIndex = layoutManager.glyphIndexForCharacterAtIndex(str.length - 1)
-        let locationInLine = layoutManager.locationForGlyphAtIndex(glyphIndex)
-        print(locationInLine)
-        let boundingRect = layoutManager.boundingRectForGlyphRange(NSMakeRange(glyphIndex, 1), inTextContainer: textContainer!)
-        print(boundingRect)
-        let size = attachment2.image!.size
-        var ret = CGRectZero
-        ret.origin.x = textView.textContainerInset.left + boundingRect.origin.x
-        ret.origin.y = textView.textContainerInset.top + boundingRect.origin.y + locationInLine.y - size.height
-        ret.size = size
-        imageView.frame = ret
+        str.enumerateAttribute(NSAttachmentAttributeName, inRange: NSMakeRange(0, str.length), options: []) { (att, range, _) -> Void in
+            guard let attachment = att as? NSTextAttachment else { return }
+            guard delegate.layoutManager(layoutManager, shouldGenerateInfoForAttachment: attachment) else { return }
+            let glyphRange = layoutManager.glyphRangeForCharacterRange(range, actualCharacterRange: nil)
+            let locationInLine = layoutManager.locationForGlyphAtIndex(glyphRange.location)
+            let boundingRect = layoutManager.boundingRectForGlyphRange(glyphRange, inTextContainer: textContainer)
+            let lineRect = layoutManager.lineFragmentRectForGlyphAtIndex(glyphRange.location, effectiveRange: nil)
+            let rect = attachment.attachmentBoundsForTextContainer(textContainer, proposedLineFragment: lineRect, glyphPosition: locationInLine, characterIndex: range.location)
+            var ret = CGRectZero
+            ret.origin.x = boundingRect.origin.x
+            ret.origin.y = boundingRect.origin.y + locationInLine.y - rect.size.height
+            ret.size = rect.size
+            delegate.layoutManager(layoutManager, didGetFrame: ret, forAttachment: attachment)
+        }
     }
 }
+
