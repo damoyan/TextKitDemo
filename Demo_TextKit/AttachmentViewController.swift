@@ -32,6 +32,7 @@ class AttachmentViewController: UIViewController {
         let para = NSMutableParagraphStyle()
         para.lineSpacing = 0
         mutable.addAttribute(NSParagraphStyleAttributeName, value: para, range: NSMakeRange(0, mutable.length))
+        mutable.addAttribute(NSFontAttributeName, value: UIFont(name: "Zapfino", size: 16)!, range: NSMakeRange(0, mutable.length))
         textView.attributedText = mutable
     }
 
@@ -83,7 +84,7 @@ class AttachmentViewController: UIViewController {
         textView.editable = false
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.redColor().CGColor
-        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        textView.font = UIFont(name: "Zapfino", size: 16)!
         view.addSubview(textView)
         self.textView = textView
         textView.layoutManager.delegate = self
@@ -98,7 +99,8 @@ class AttachmentViewController: UIViewController {
         let tag = sender.tag
         adjustAttachment(attachment, tag: tag)
         adjustAttachment(attachment2, tag: tag)
-        textView.layoutManager.invalidateLayoutForCharacterRange(NSMakeRange(10, 1), actualCharacterRange: nil)
+        textView.layoutManager.invalidateLayoutForCharacterRange(NSMakeRange(0, textView.textStorage.length), actualCharacterRange: nil)
+        textView.layoutManager.ensureLayoutForTextContainer(textView.textContainer)
     }
     
     private func adjustAttachment(attachment: NSTextAttachment, tag: Int) {
