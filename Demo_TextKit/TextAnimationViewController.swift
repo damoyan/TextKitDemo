@@ -52,6 +52,7 @@ class TextAnimationViewController: ViewController {
     @IBAction func toggleLigature(sender: UIButton) {
         useLigature = !useLigature
         setupString("just test for the effect Zapfino", useLigature: useLigature)
+        animation()
     }
     
     @IBAction func tapButton(sender: AnyObject) {
@@ -84,12 +85,15 @@ class TextAnimationViewController: ViewController {
             let duration = (Double(arc4random() % 100) / 200.0) + 0.5
             let delay = Double(arc4random() % 100) / 100.0
             l.opacity = 0
+            let finalFrame = l.frame
+            l.frame = CGRect(origin: CGPoint(x: CGFloat(arc4random() % 375), y: CGFloat(arc4random() % 550)), size: finalFrame.size)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(Double(NSEC_PER_SEC) * delay)), dispatch_get_main_queue(), { () -> Void in
                 CATransaction.begin()
                 CATransaction.setDisableActions(true)
                 CATransaction.setAnimationDuration(duration)
                 CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn))
                 l.opacity = 1
+                l.frame = finalFrame
                 l.setNeedsDisplay()
                 CATransaction.commit()
             })
