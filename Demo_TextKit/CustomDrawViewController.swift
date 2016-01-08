@@ -18,7 +18,7 @@ class CustomDrawViewController: UIViewController {
         super.viewDidLoad()
 
         setup()
-        textView.attributedText = NSAttributedString(string: displayString)
+        textView.attributedText = NSAttributedString(string: displayString1)
     }
     
     private func setup() {

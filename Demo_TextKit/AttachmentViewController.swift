@@ -15,6 +15,7 @@ class AttachmentViewController: UIViewController {
     let image = UIImage(named: "1")
     var textView: UITextView!
     let imageView = UIImageView()
+    var layers = [CALayer]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class AttachmentViewController: UIViewController {
         attachment.image = UIImage(named: "test")
         attachment2.image = image
         let attachmentString = NSAttributedString(attachment: attachment)
-        let mutable = NSMutableAttributedString(string: "just test", attributes: [NSFontAttributeName: textView.font!])
+        let mutable = NSMutableAttributedString(string: "just test for", attributes: [NSFontAttributeName: textView.font!])
         mutable.appendAttributedString(attachmentString)
         mutable.appendAttributedString(NSAttributedString(string: "the effect, add more character to generate a new line", attributes: [NSFontAttributeName: textView.font!]))
         mutable.appendAttributedString(NSAttributedString(attachment: attachment2))
@@ -144,6 +145,11 @@ extension AttachmentViewController: AttachmentInfoDelegate {
     
     func layoutManager(layoutManager: NSLayoutManager, didCompleteLayoutForTextContainer textContainer: NSTextContainer?, atEnd layoutFinishedFlag: Bool) {
         guard let textContainer = textContainer else { return }
+        layers.forEach { $0.removeFromSuperlayer() }
+        layers.removeAll()
+        layoutManager.enumerateLineFragmentsForGlyphRange(NSMakeRange(0, textView.attributedText.length)) { (lineFrag, used, textContainer, range, _) -> Void in
+            self.createLineLayer(lineFrag)
+        }
         guard let delegate = layoutManager.delegate as? AttachmentInfoDelegate else { return }
         guard delegate.layoutManagerShouldGenerateAttachmentInfo(layoutManager) else { return }
         let str = textView.attributedText
@@ -161,6 +167,17 @@ extension AttachmentViewController: AttachmentInfoDelegate {
             ret.size = rect.size
             delegate.layoutManager(layoutManager, didGetFrame: ret, forAttachment: attachment)
         }
+    }
+}
+
+extension AttachmentViewController {
+    private func createLineLayer(frame: CGRect) {
+        let layer = CALayer()
+        layer.frame = frame
+        layer.borderColor = UIColor.blueColor().CGColor
+        layer.borderWidth = 1 / UIScreen.mainScreen().scale
+        textView.layer.addSublayer(layer)
+        layers.append(layer)
     }
 }
 
